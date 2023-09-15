@@ -1,0 +1,98 @@
+Diffing Files
+
+When you want to see the difference between to copies of some code, 
+we can use the command diff.
+
+- Example:
+diff 01_rearrange1.py 01_rearrange2.py
+
+- Returns:
+7c7
+<     result = re.search(r"^([\w .]*), ([\w .]*)$, name")  
+---
+>     result = re.search(r"^([\w .-]*), ([\w .-]*)$, name")
+
+- Explanation:
+The "7c7" means that the line number 7 was changed "c"
+The "<" symbol means that this line was removed and 
+The ">" symbol that this line was added.
+
+-------------------------------------------------------------
+
+diff 01_validations1.py 01_validations2.py
+
+
+4c4,5
+<     assert (type(username) == str), "username must be a string"
+---
+>     if type(username) != str:
+>         raise TypeError("username must be a string")
+9a11,13
+>         return False
+>     # Usernames can't begin with a number
+>     if username[0].isnumeric():
+
+
+The "4c4,5" Means that the line 4 was replaced for the lines 4 and 5.
+The "9a11,13" means that, where was line 9 in the first file, 3 lines 
+were added "a" on the new file on lines 11 to 13.
+
+-------------------------------------------------------------
+
+diff -u 01_validations1.py 01_validations2.py
+
+
+--- 01_validations1.py  2023-09-15 01:22:24.994475200 +0200     
++++ 01_validations2.py  2023-09-15 01:24:14.847553200 +0200     
+@@ -1,11 +1,15 @@
+ #!/usr/bin/env python3
+
+ def validate_user(username, minlen):
+-    assert (type(username) == str), "username must be a string"
++    if type(username) != str:
++        raise TypeError("username must be a string")
+     if minlen < 1:
+         raise ValueError("minlen must be at least 1")
+     if username.isalnum():
+         return True
+     if not username.isalnum():
+         return False
++    # Usernames can't begin with a number
++    if username[0].isnumeric():
++        return False
+     return True
+
+With the "-u" flag, it shows the differences in the unified format, with more 
+context than before and uses the minus sign "-" to mark lines that were removed
+and the plus sign "+" to mark lines that were added.
+
+To compare files, Diff is the most popular but not the only one.
+"wdiff" highlights the words that have changed in a file instea of working 
+line by line like diff does.
+There are some graphical tools like "meld", "KDiff3" or "vimdiff".
+
+-------------------------------------------------------------
+
+Generating a diff file (aka. patch file).
+
+- Example:
+diff -u old_file new_file > changes.diff
+
+With this command we are generating a file named "changes.diff" with the contents
+of the "diff -u" command
+
+-------------------------------------------------------------
+
+Patching our code using the diff file.
+
+We'll pass the name of the file that we want to patch in this case, cpu_usage.py,
+as the first parameter to the command and then we'll provide the diff file through
+standard input using the "<" symbol.
+
+- Example:
+patch 01_cpu_usage.py < 01_cpu_usage.diff
+
+- Returns:
+patching file 01_cpu_usage.py
+
+Now the file will be updated with the diff file automatically.
