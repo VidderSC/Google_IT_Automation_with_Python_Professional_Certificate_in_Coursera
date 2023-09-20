@@ -1,0 +1,12 @@
+- Merge conflicts.
+
+Normally Git can merge for us using Fast-forward but, if the same file has been
+modified on the same lines on both branches, it will create a conflict.
+
+$ git branch test-branch2
+
+$ git branch
+* main
+  test-branch2
+
+  

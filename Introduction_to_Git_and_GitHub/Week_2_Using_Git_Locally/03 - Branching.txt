@@ -20,7 +20,8 @@ Using "git branch" on it's own will list all the branches:
 * main
 
 adding the name of a branch after "git branch" will create a new branch:
-git branch test-branch
+
+$ git branch test-branch
 
 $ git branch
 * main
