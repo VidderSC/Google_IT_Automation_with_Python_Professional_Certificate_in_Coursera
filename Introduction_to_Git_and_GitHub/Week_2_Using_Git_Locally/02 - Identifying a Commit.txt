@@ -1,0 +1,30 @@
+Identifying a commit
+
+So far we have been using the HEAD alias to specify the most recent commit in
+our Git history, but if we need to revert others commits farther back in time,
+we can target an specific commit by using its commit ID.
+
+The commit ID is a 40 characters long string after the word commit when looking
+at the "git log" command.
+
+This long jumble of letters and numbers is actually something called a Hash,
+which is calculated using an algorithm called SHA1. We will not go into details
+on how the encription and generation of this Hash works.
+
+git log -2              # "-2" will only display the last 2 entries on the log.
+
+"""
+
+commit 53de1959d25c5d339d42cffa66602cfa049148c5 (HEAD -> main, origin/main, origin/HEAD)
+Author: Vidders <Vidders@users.noreply.github.com>
+Date:   Wed Sep 20 00:45:12 2023 +0200
+
+    progressing on week 2
+
+commit 212946b537d6cb15bd9f9fa4c6b8dfe0772aafa5
+Author: Vidders <Vidders@users.noreply.github.com>
+Date:   Tue Sep 19 23:45:11 2023 +0200
+
+    Moved files to the proper folder.
+
+"""

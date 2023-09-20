@@ -34,19 +34,19 @@ git log
 """
 
 commit 212946b537d6cb15bd9f9fa4c6b8dfe0772aafa5 (HEAD -> main, origin/main, origin/HEAD)
-Author: David Som <103112459+VidderSC@users.noreply.github.com>
+Author: Vidders <Vidders@users.noreply.github.com>
 Date:   Tue Sep 19 23:45:11 2023 +0200
 
     Moved files to the proper folder.
 
 commit cf4c30cccc8d8cfd9abe45cbf29f5f3032920b10
-Author: David Som <103112459+VidderSC@users.noreply.github.com>
+Author: Vidders <Vidders@users.noreply.github.com>
 Date:   Tue Sep 19 23:44:41 2023 +0200
 
     Moved files to the proper folder.
 
 commit 29f20eacb5afb80f3e8b6ee5f5bc6e0816b05dd4
-Author: David Som <103112459+VidderSC@users.noreply.github.com>
+Author: Vidders <Vidders@users.noreply.github.com>
 Date:   Tue Sep 19 23:39:39 2023 +0200
 
     Finished Week 2
@@ -61,7 +61,7 @@ git log -p
 """
 
 commit 212946b537d6cb15bd9f9fa4c6b8dfe0772aafa5 (HEAD -> main, origin/main, origin/HEAD)
-Author: David Som <103112459+VidderSC@users.noreply.github.com>
+Author: Vidders <Vidders@users.noreply.github.com>
 Date:   Tue Sep 19 23:45:11 2023 +0200
 
     Moved files to the proper folder.
@@ -92,7 +92,7 @@ index 0000000..08372ce
 \ No newline at end of file
 
 commit cf4c30cccc8d8cfd9abe45cbf29f5f3032920b10
-Author: David Som <103112459+VidderSC@users.noreply.github.com>
+Author: Vidders <Vidders@users.noreply.github.com>
 Date:   Tue Sep 19 23:44:41 2023 +0200
 
     Moved files to the proper folder.
@@ -112,7 +112,7 @@ index 17fef71..0000000
 \ No newline at end of file
 
 commit 29f20eacb5afb80f3e8b6ee5f5bc6e0816b05dd4
-Author: David Som <103112459+VidderSC@users.noreply.github.com>
+Author: Vidders <Vidders@users.noreply.github.com>
 Date:   Tue Sep 19 23:39:39 2023 +0200
 
     Finished Week 2
@@ -146,7 +146,7 @@ git log --stat
 """
 
 commit 212946b537d6cb15bd9f9fa4c6b8dfe0772aafa5 (HEAD -> main, origin/main, origin/HEAD)
-Author: David Som <103112459+VidderSC@users.noreply.github.com>
+Author: Vidders <Vidders@users.noreply.github.com>
 Date:   Tue Sep 19 23:45:11 2023 +0200
 
     Moved files to the proper folder.
@@ -156,7 +156,7 @@ Date:   Tue Sep 19 23:45:11 2023 +0200
  2 files changed, 369 insertions(+)
 
 commit cf4c30cccc8d8cfd9abe45cbf29f5f3032920b10
-Author: David Som <103112459+VidderSC@users.noreply.github.com>
+Author: Vidders <Vidders@users.noreply.github.com>
 Date:   Tue Sep 19 23:44:41 2023 +0200
 
     Moved files to the proper folder.
@@ -166,7 +166,7 @@ Date:   Tue Sep 19 23:44:41 2023 +0200
  2 files changed, 369 deletions(-)
 
 commit 29f20eacb5afb80f3e8b6ee5f5bc6e0816b05dd4
-Author: David Som <103112459+VidderSC@users.noreply.github.com>
+Author: Vidders <Vidders@users.noreply.github.com>
 Date:   Tue Sep 19 23:39:39 2023 +0200
 
     Finished Week 2
@@ -176,7 +176,7 @@ Date:   Tue Sep 19 23:39:39 2023 +0200
  2 files changed, 369 insertions(+)
 
 commit 01d247e0360d4e973a8bb1b928b736eaef5ba5a9
-Author: David Som <103112459+VidderSC@users.noreply.github.com>
+Author: Vidders <Vidders@users.noreply.github.com>
 Date:   Tue Sep 19 22:33:31 2023 +0200
 
     deleted test file
