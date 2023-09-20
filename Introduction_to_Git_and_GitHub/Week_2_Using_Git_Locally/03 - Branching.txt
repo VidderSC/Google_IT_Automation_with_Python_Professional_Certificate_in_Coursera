@@ -1,0 +1,56 @@
+- What is a branch?
+At it's most basic level, a branch is a pointer to a particular commit.
+But more importantly, it represents an independent line of development
+in a project. Of which the commit it points to is the latest link in a
+chain of developing history.
+
+When creating a new Git repository, the default name for our main branch
+is MASTER. 
+* Personal note: 
+This is subject to change and recommended to change it to a different
+name, for example: MAIN.
+
+
+- Creating new branches.
+
+We can use the "git branch" comand to list, create, delete and
+manipulate branches in our repository.
+
+Using "git branch" on it's own will list all the branches:
+* main
+
+adding the name of a branch after "git branch" will create a new branch:
+git branch test-branch
+
+$ git branch
+* main
+  test-branch
+
+For us to change to a different branch, we use the "git checkout" command.
+We use git checkout to check out the latest snapshot for both files and
+for branches.
+
+$ git checkout
+Your branch is up to date with 'origin/main'.
+
+$ git checkout test-branch 
+Switched to branch 'test-branch'
+
+$ git branch
+  main
+* test-branch
+
+
+Creating a branch and switching to it immediately is so common that Git give us
+a useful shortcut to create a new branch and switch to it in a single command.
+This shortcut is by using the "-b" flag when calling the checkout command.
+
+$ git checkout -b new-test-branch
+Switched to a new branch 'new-test-branch'
+
+$ git branch
+  main
+* new-test-branch
+  test-branch
+
+  

@@ -1,0 +1,15 @@
+- Deleting branches:
+
+We can delete a branch that we don't need anymore by using the "-d" flag
+when calling the "git branch" command.
+
+$ git branch -d new-test-branch 
+Deleted branch new-test-branch (was 95fd3fe).
+
+$ git branch
+* main
+  test-branch
+
+If there are changes in the branch we want to delete that haven't been merged
+back into the master branch, git will let us know with an error.
+
