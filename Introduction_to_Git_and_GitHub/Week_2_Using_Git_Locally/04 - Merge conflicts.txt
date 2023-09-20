@@ -9,4 +9,127 @@ $ git branch
 * main
   test-branch2
 
-  
+
+$ git merge test-branch2 
+Auto-merging Introduction_to_Git_and_GitHub/Week_2_Using_Git_Locally/03_test_script.py
+CONFLICT (content): Merge conflict in Introduction_to_Git_and_GitHub/Week_2_Using_Git_Locally/03_test_script.py
+Automatic merge failed; fix conflicts and then commit the result.
+
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   Introduction_to_Git_and_GitHub/Week_2_Using_Git_Locally/03_test_script.py
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   Introduction_to_Git_and_GitHub/Week_2_Using_Git_Locally/04 - Merge conflicts.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+When we open the conflicting file, we will see that Git added some information
+to our file to tell us which parts of the code are conflicting.
+
+"""
+
+#!/usr/bin/env python3
+
+def main():
+<<<<<<< HEAD
+    """Documenting the main function. Will pass ;)"""
+=======
+    print("pass")
+>>>>>>> test-branch2
+
+main()
+
+"""
+
+
+We will make the necessary changes to the code and then save the file.
+In this case we will accept both changes:
+
+"""
+
+#!/usr/bin/env python3
+
+def main():
+    """Documenting the main function. Will pass ;)"""
+    print("pass")
+
+main()
+
+"""
+
+
+Afterwards we will "git add" the file and commit it.
+
+$ git add 03_test_script.py 
+
+$ git commit
+hint: Waiting for your editor to close the file... 
+
+"""
+
+Merge branch 'test-branch2'
+
+Conflict now has been resolved by keeping the lines from both branches.
+
+# Conflicts:
+#	Introduction_to_Git_and_GitHub/Week_2_Using_Git_Locally/03_test_script.py
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please run
+#	git update-ref -d MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   03_test_script.py
+#
+# Changes not staged for commit:
+#	modified:   04 - Merge conflicts.txt
+#
+
+"""
+
+$ git log -2
+
+commit 6a2c7d517e3f983e9a33955d21077a96ff1d0483 (HEAD -> main)
+Merge: 995e28e c55cac2
+Author: Vidders <Vidders@users.noreply.github.com>
+Date:   Thu Sep 21 01:02:27 2023 +0200
+
+    Merge branch 'test-branch2'
+
+    Conflict now has been resolved by keeping the lines from both branches.
+
+commit c55cac2e4b6078164500a61b31d6add74a7c3782 (test-branch2)
+Author: Vidders <Vidders@users.noreply.github.com>
+Date:   Thu Sep 21 00:52:17 2023 +0200
+
+    updating the file to create a future conflict while merging to main
+
+
+
+* Note:
+  If the merge affects multiple files and it's too complicated to solve right
+  away, we can use the "git merge --abort" command as an scape hatch.
+  This will stop the merge and reset the files in our working tree back to
+  the previous commit before the merge ever happened.
