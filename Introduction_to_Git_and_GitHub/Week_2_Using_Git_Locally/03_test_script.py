@@ -2,5 +2,6 @@
 
 def main():
     """Documenting the main function. Will pass ;)"""
+    print("pass")
 
 main()
