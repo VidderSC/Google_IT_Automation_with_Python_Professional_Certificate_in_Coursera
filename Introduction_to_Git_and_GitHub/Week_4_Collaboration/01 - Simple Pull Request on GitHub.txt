@@ -1,0 +1,3 @@
+Forking
+
+A way of creating a copy of the given repository so that belongs to our user.
