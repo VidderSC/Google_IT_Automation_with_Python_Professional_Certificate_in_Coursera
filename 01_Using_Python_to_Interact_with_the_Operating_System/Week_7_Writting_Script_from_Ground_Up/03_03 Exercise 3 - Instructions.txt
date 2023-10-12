@@ -1,0 +1,77 @@
+Exercise - 3
+
+We'll now work with a file named csv_to_html.py.
+This file converts the data in a CSV file into an HTML file that contains
+a table with the data. Let's practice this with an example file.
+
+Create a new CSV file.
+
+nano user_emails.csv
+
+Add the following data into the file:
+Full Name, Email Address
+Blossom Gill, blossom@abc.edu
+Hayes Delgado, nonummy@utnisia.com
+Petra Jones, ac@abc.edu
+Oleg Noel, noel@liberomauris.ca
+Ahmed Miller, ahmed.miller@nequenonquam.co.uk
+Macaulay Douglas, mdouglas@abc.edu
+Aurora Grant, enim.non@abc.edu
+Madison Mcintosh, mcintosh@nisiaenean.net
+Montana Powell, montanap@semmagna.org
+Rogan Robinson, rr.robinson@abc.edu
+Simon Rivera, sri@abc.edu
+Benedict Pacheco, bpacheco@abc.edu
+Maisie Hendrix, mai.hendrix@abc.edu
+Xaviera Gould, xlg@utnisia.net
+Oren Rollins, oren@semmagna.com
+Flavia Santiago, flavia@utnisia.net
+Jackson Owens, jackowens@abc.edu
+Britanni Humphrey, britanni@ut.net
+Kirk Nixon, kirknixon@abc.edu
+Bree Campbell, breee@utnisia.net
+
+
+Save the file by clicking Ctrl-o, Enter key, and Ctrl-x.
+
+Give executable permission to the script file csv_to_html.py.
+
+sudo chmod +x csv_to_html.py
+
+
+To visualize the data in the user_emails.csv file, you have to generate a
+webpage that'll be served by the webserver running on the machine.
+
+The script csv_to_html.py takes in two arguments, the CSV file, and location
+that would host the HTML page generated.
+Give write permission to the directory that would host that HTML page:
+
+sudo chmod  o+w /var/www/html
+
+
+Next, run the script csv_to_html.py script by passing two arguments:
+user_emails.csv file and the path /var/www/html/.
+Also, append a name to the path with an HTML extension.
+This should be the name that you want the HTML file to be created with.
+
+./csv_to_html.py user_emails.csv /var/www/html/<html-filename>.html
+
+Replace <html-filename> with the new name.
+
+
+Navigate to the /var/www/html directory. Here, you'll find an HTML file
+created with the filename you passed to the above script.
+
+ls /var/www/html
+
+
+Now, to view this HTML page, open any web-browser and enter the following
+URL in the search bar.
+
+[linux-instance-external-IP]/[html-filename].html
+
+Output:
+
+
+You should now be able to visualize the data within the user_emails.csv file
+on a webpage.

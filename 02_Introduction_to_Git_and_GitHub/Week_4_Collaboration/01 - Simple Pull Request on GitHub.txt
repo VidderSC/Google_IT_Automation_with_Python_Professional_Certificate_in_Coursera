@@ -1,0 +1,28 @@
+- Forking:
+A way of creating a copy of the given repository so that belongs to our user.
+
+
+- Pull Request:
+A commit or series of commits that you send to the owner of the repository so that they incorporate it into their tree.
+
+
+- Typical Pull Request Workflow on GitHub:
+If we just want to update documentation or fix some typos, we can do it directly on GitHub's website but, if we want to make some changes to the code and also have the possibility to test the code before sending the Pull Request, it's better to create a fork and then download it to our computer using "git clone".
+
+Once we have the code in our computer, we should create a branch for the modifications using "git checkout -b <branch-name>"
+
+We "add" and "commit" the changes on the new branch, then we send it to the repository using "git push -u origin <branch-name>"
+
+Now on our GitHub website will appear this new branch and the option to create a Pull Request to the original repository.
+
+Once we have created a Pull Request, after reviewing it, they could ask us to make some modifications. We just need to push those modifications to the same branch and will update the Pull Request that we have already made originally.
+
+For creating a new Pull Request we would need to create a new branch.
+
+Different projects will have different guidelines so, make sure that you read those guidelines to ensure that you adhere to them.
+
+
+- Squashing Changes:
+
+If the project maintainers ask us to create a single commit that includes all the changes and a more detailed description than the one we've submitted. We can do that by using the interactive version of the rebase command called "rebase -i", as the parameter to the command will pass the master branch. So we'll call "git rebase -i master".
+When we call an interactive rebase, a text editor opens with a list of all the selected commits from the oldest to the most recent.

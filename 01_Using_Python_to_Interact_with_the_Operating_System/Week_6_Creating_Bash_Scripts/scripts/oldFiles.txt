@@ -1,0 +1,2 @@
+/mnt/c/coursera/google/week_6_creating_bash_scripts/data/jane_profile_07272018.doc
+/mnt/c/coursera/google/week_6_creating_bash_scripts/data/jane_contact_07292018.csv

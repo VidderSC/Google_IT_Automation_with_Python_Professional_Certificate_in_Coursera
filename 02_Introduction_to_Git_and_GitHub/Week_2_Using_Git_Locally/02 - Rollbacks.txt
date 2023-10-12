@@ -1,0 +1,11 @@
+Rollbacks
+
+Public commits can be reverted in a couple of different ways, one of them is by
+using the following command:
+
+git revert HEAD
+
+Git revert doesn't just mean undo.
+Instead, it creates a commit that contains the inverse of all the changes made
+in the bad commit in order to cancel them out.
+This way we will undo the changes without touching the commits history.

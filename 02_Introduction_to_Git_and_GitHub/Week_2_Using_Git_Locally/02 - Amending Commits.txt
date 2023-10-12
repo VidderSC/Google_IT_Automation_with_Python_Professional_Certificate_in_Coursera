@@ -1,0 +1,20 @@
+Amending Commits
+
+If we have already commited some changes but, we realize that we need to remove 
+some files or change the commit comment, we can use the "--amend" flag on the
+"git commit" command:
+
+git commit --amend
+
+When we run "git commit --amend", git will take whatever is currently in our
+staging area and run the git commit workflow to overwrite the previous commit.
+
+While using this "--amend" flag is ok to do on our personal git repositories,
+we should not use it on public commits. 
+
+This is because using "--amend" rewrites the git history removing the previous
+commit and replacing it with the amended one.
+This can lead to some confusing situations when working with other people and
+should definitely be avoided.
+
+*** Avoid ammending commits that have already been made public. ***

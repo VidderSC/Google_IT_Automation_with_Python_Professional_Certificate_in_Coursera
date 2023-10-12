@@ -1,0 +1,23 @@
+Revert modifications
+
+- Before Stagin our changes:
+
+If we modify a file that is being tracked, and we check that our modifications 
+didn't have the expected result and/or is not working, without stagin the file,
+we can run the "git status" command and see the list of all the modified files,
+then we can use the following command to discard the changes on the working
+directory made to that file:
+
+git checkout <filename>
+
+If we need to check out individual changes instead of the whole file, we can do
+that by using the "-p" flag. This will ask you change by change if you want to 
+go back to the previous snapshot or not.
+
+
+- Once we have staged them but not commited yet:
+
+To revert changes made to a file that we have already staged, we can run the 
+"git reset" command, also can be seen on the "git status" screen.
+
+git reset HEAD <filename>

@@ -1,0 +1,68 @@
+Conflict Resolution Cheat Sheet
+
+Merge conflicts are not uncommon when working in a team of developers, or on 
+Open Source Software. Fortunately, GitHub has some good documentation on how
+to handle them when they happen:
+
+https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-merge-conflicts
+
+https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line
+
+
+You can also use "git rebase <branchname>" to change the base of the current
+branch to be branchname:
+https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+
+
+The git rebase command is a lot more powerful.
+Check out this link for more information:
+https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
+
+
+When to use "rebase" over "merge"
+
+When you're working with Git branches and want to combine the changes from one
+branch into another, you have two main options: merging and rebasing. 
+
+Merging means taking the changes from one branch and adding them to another. 
+This creates a new "merge commit" that combines the changes from both branches.
+Here's why you might want to avoid it:
+
+- Messy History: Merging can make your commit history look messy and cluttered
+because it adds extra merge commits. This can make it harder to understand the
+history of your project.
+- Linear History: Sometimes, you want a clean, linear history where each commit
+follows the previous one in a straight line. Merging creates a more branching
+history, which can be confusing.
+- Integration Issues: If you merge a branch with many changes into another
+branch, it might introduce conflicts (where Git can't automatically decide
+which changes to keep) that you need to resolve.
+
+Rebasing, on the other hand, is like moving your changes to a new starting
+point. Here's why it's often preferred:
+
+- Clean History: Rebasing creates a cleaner and more linear commit history
+because it replays your changes on top of the latest changes in the branch
+you're rebasing onto. It appears as if you made your changes directly on top
+of the latest code.
+- Easier to Understand: With a linear history, it's easier to see the
+chronological order of changes and understand the development flow of
+the project.
+- Fewer Conflicts: Since rebasing integrates your changes with the latest code,
+it often results in fewer conflicts compared to merging.
+
+However, there's a catch with rebasing. 
+
+It rewrites commit history, so you should only use it on branches that you
+haven't shared with others or have a good reason to rewrite the history
+(e.g., cleaning up your work before merging it into the main branch). 
+
+If you're working in a shared repository with other collaborators, it's
+generally better to use merging to avoid confusion.
+
+In summary, rebasing is preferred when you want a cleaner, more linear history
+and are working on branches that are not shared widely.
+Merging is a safer option when collaborating with others and sharing branches.
+
+Your choice should depend on your specific workflow and the context of your
+Git project.
