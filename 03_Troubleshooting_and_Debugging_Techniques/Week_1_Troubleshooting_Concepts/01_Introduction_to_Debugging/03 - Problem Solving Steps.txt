@@ -1,0 +1,88 @@
+- Problem Solving Steps:
+    1. Getting information.
+    2. Finding the root cause.
+    3. Performing the necessary remediation.
+
+1 - Getting Information:
+    We should gather as much information as we need about the following:
+    · Current state of things.
+    · What the issue is.
+    · When it happens.
+    · What the consequences are.
+
+    To get this information, we can use any existing documentation. This can be 
+    internal documentation, manual pages, or even questions asked on the Internet.
+    One super important resource to solve a problem is the reproduction case.
+
+    - Reproduction case: 
+    A clear description of how and when the problem appears.
+
+2 - Finding the Root Cause:
+    This is usually the most difficult step.
+    The key here is to get to the bottom of the following:
+    · What's going on.
+    · What triggered the problem.
+    · How we can change that.
+
+3 - Performing the Necessary Remediation:
+    Depending on the problem, this might include an immediate remediation to 
+    get the system back to health, and then a medium or long-term remediation 
+    to avoid the problem in the future.
+
+
+While these are three basic steps of problem-solving, they don't always happen 
+sequentially. 
+
+It's pretty common that while trying to find the root cause, we discover that 
+we need even more info about the current state. So we gather more information 
+until we find the answer we're looking for, or we could understand the problem 
+just enough to create a workaround that lets our users get back to work quickly,
+but we'd still need more time to get to the root cause and prevent the problem 
+from happening again.
+
+
+- Documenting:
+    It is very important that we document everything that what we do:
+        - The info that we get
+        - The different things we tested to figure out the root cause. 
+        - The steps we took to fix the issue.
+    This documentation will be very useful next time a similar issue pops up.
+
+
+- A Real life example:
+
+A user asks for your help because their computer is unexpectedly shutting down. 
+The problem could be a hardware issue, a software issue, or even a onfiguration
+issue. Lets follow the problem solving steps:
+
+- Getting Information:
+    You'll want to know things like: 
+    · When it happened.
+    · What the user was doing when it happened.
+    · How regularly it's happening.
+    
+    You'll also want to look at the computer logs to check if there are any
+    interesting errors.
+    You find a line in the logs that says the temperature threshold was 
+    exceeded and so the computer shutdown.
+    
+    That's useful information, you know why the computer shut down but you don't
+    know why it overheated, so you'll need to keep investigating.
+
+- Root Cause:
+    After not finding anything else interesting in the logs, you decide to check
+    if it's a hardware issue. When you open up the computer, you find that the
+    fan that's supposed to cool down the CPU is full of dirt, and so it isn't
+    spinning properly. That's the root cause of the problem. 
+
+- Necessary Remediation:
+    The short-term remediation is to clean up the fan so that it can spin again
+    and the computer doesn't overheat.
+
+
+Now, What's the long-term remediation? 
+In this case, it would be deploying monitoring on the computers to make sure you
+get notified early when they're overheating.
+
+Long-term remediation would also include checking if you can reduce the amount
+of dust in the air so that there's less chance of this happening again.

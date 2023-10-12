@@ -1,0 +1,35 @@
+- Troubleshooting:
+    · The process of identifying, analyzing and solving problems.
+    · Troubleshooting is when we're fixing problems in the system running the 
+      application.
+
+- Debugging:
+    · The process of identifying, analyzing and removing bugs in a system.
+    · Debugging is when we're fixing the bugs in the actual code of the 
+      application.
+
+There are lots of tools that we can use to get more information about the 
+system and what the programs in our system are doing.
+
+Tools that can show us ongoing network connections, and help us analyze the 
+traffic going over our cables:
+· tcpdump
+· Wireshark 
+
+Tools that can show us the number and types of resources used in the system:
+· ps 
+· top
+· free
+
+To look at the system calls made by a program:
+· strace 
+
+To look at the library calls made by the software:
+· ltrace
+
+When debugging the code of a program, we can combine these tools with specific 
+debugging tools developed for the programming language used to write the 
+application.
+
+Debuggers let us follow the code line by line, inspect changes in variable
+assignments, interrupt the program when a specific condition is met and more.

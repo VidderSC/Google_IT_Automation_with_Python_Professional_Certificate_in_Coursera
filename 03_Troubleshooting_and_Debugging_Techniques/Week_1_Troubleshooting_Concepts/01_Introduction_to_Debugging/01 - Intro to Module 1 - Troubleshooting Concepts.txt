@@ -1,0 +1,27 @@
+Whether it's an application crashing, a hardware issue, or network outage, as 
+IT specialists, we tend to run into problems that need solving pretty 
+regularly. 
+
+When facing these issues, we need to make sure that people affected by the 
+problem can get back to doing their jobs as fast as possible. 
+
+We also have to plan for how to prevent against the same problems from 
+happening again in the future. 
+
+In this module, we'll learn some essential debugging techniques. 
+We'll start with the basic process that we can use for tackling any technical 
+problem. 
+Then we'll look at different ways that we can approach understanding what's 
+going on and finding the root cause of an issue, including using a process 
+called binary search to troubleshoot problems. 
+
+Along the way, we'll talk about a bunch of examples of real-world problems and 
+how to apply the techniques to solve them.
+
+The techniques we'll look at are reusable and we'll let you solve almost any 
+technical problem that you might face in the future. We'll keep applying them 
+throughout the course as we explore different issues that can affect us or the 
+users we're supporting in different ways. 
+
+Finding the solution to a problem can sometimes take a really long time. 
+Dealing with software is like trying to solve one giant puzzle.
