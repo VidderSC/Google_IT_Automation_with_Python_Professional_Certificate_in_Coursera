@@ -1,0 +1,24 @@
+- Bisect when using Git:
+When using Git for version control, we can use a Git command called "bisect". 
+
+Bisect receives two points in time in the Git history and repeatedly lets us 
+try the code at the middle point between them until we find the commit that 
+caused the breakage. 
+
+This doesn't even need to be your Git repository. 
+If you're using open source software that's tracking Git, you can use the 
+bisect commit to find out which command cause the software to stop working on 
+your computer. 
+For example, if the latest release of the Linux kernel causes the sound card on 
+your computer to stop working, you can use Git bisect to find the commit that 
+broke it and report this as a bug to be fixed. 
+
+As we called out when we were talking about binary search, the longer the list 
+of items that needs to be checked, the more we'll gain by cutting our problem 
+in half on each iteration. 
+
+If it's just five options that need to be checked, we can simply go one-by-one. 
+It won't make a lot of difference and it might be easier to keep track of what 
+we tried. 
+But if it's a 100, we definitely want to bisect the problem so we can find the 
+answer in 7 steps and not a 100. 
