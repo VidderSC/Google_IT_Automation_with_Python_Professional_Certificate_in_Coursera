@@ -1,0 +1,83 @@
+"""
+Having a good understanding of the data structures available to us can help us 
+avoid unnecessary expensive operations and create efficient scripts. 
+In particular, we'll want to understand the performance of those structures 
+under different conditions.
+"""
+
+Some data structures in Python are:
+· Lists
+· Tuples
+· Dictionaries
+· Sets
+
+Each of them have their uses, their advantages and their disadvantages.
+
+Let's do a quick recap:
+
+- Lists:
+  Sequences of elements. We can add, remove or modify the elements in them and
+  we can iterate through the whole list to operate on each element.
+
+  Different programming languages call them differently:
+  · ArrayList, in Java.
+  · Vector, in C++.
+  · Array, in Ruby.
+  · Slice, in Go.
+
+  All these names reference to the same data structure that is fast to add or 
+  remove elements at the end.
+  But adding or removing elements in the middle can be slow because all the 
+  elements that follow need to be repositioned.
+  
+  It's fast to access the element in a specific position in the list, but 
+  finding an element in an unknown position requires going through the whole 
+  list. This can be super slow if the list is long.
+
+- Dictionaries:
+  Store key-value pairs. We add data by associating a value to a key and then
+  we retrieve a value by looking up a specific key.
+  
+  Different naming:
+  · HashMap, in Java.
+  · Unordered Map, in C++.
+  · Hash, in Ruby.
+  · Map, in Go.
+
+  The map part in those names comes from how we're creating a mapping between a 
+  key and a value. 
+  The Hash part comes from the fact that to make the structure efficient, a 
+  hashing function is used internally to decide how the elements will be 
+  stored.
+
+  The main characteristic of this structure is that it's super-fast for looking 
+  up keys. Once we have our data stored in a dictionary, we can find the value 
+  associated to a key in just one operation.
+
+  If it were stored in a list, we need to iterate through the list. 
+
+As a rule of thumb, if you need to access elements by position or will always 
+iterate through all the elements, use a list to store them. For example:
+· A list of all computers in the network.
+· All the employees in the company.
+· All the products currently on sale.
+
+If we need to look up the elements using a key, we'll use a dictionary.
+Examples:
+· The data associated to a user which we'd look up using their username.
+· The IP associated to a computer using the host name.
+· The data associated to a product using the internal product code.
+
+Whenever we need to do a bunch of these lookup operations, creating a 
+dictionary and using it to get the data will take a lot less time than 
+iterating over a list to find what we're looking for.
+
+But it doesn't make sense to create a dictionary and fill it with data if we're 
+only going to look up one value in it. In that case, we're wasting time 
+creating the structure when we could just iterate over the list and get the 
+element we're looking for.
+
+Another thing that we might want to think twice about is creating copies of the 
+structures that we have in memory. 
+If these structures are big, it can be pretty expensive to create those copies. 
+So we should double-check if the copy is really needed.

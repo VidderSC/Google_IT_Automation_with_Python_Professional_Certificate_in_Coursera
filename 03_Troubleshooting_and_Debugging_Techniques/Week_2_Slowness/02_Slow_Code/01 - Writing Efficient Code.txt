@@ -1,0 +1,78 @@
+"""
+We should always start by writing clear code that does what it should and
+only try to make it faster if we realize that it's not fast enough.
+"""
+
+If it takes us 10 minutes to write a script that will run in 5 seconds, and 20 
+minutes to write a script that will do the same but takes 3 seconds:
+
+- Does it make a difference? 
+It all depends on how often you run the script. 
+· If you run it once a day, the two seconds deference definitely won't justify 
+  the additional 10 minutes of work. 
+· If you're going to run the same script for the 500 computers on your network, 
+  that small difference means it will take 15 less minutes to run the whole 
+  script. So overall, we're gaining time.
+
+Of course, it's pretty hard to know in advance how fast our script will be 
+and how long it will take us to make it faster. 
+But as a rule, we aim first to write code that is:
+· Readable
+· Easy to maintain
+· Easy to understand 
+
+That lets us write code with less bugs.
+If there's something that's super slow, then yes, it makes sense to fix it, 
+particularly if the script will be executed frequently enough that making it 
+faster will save us more time than the time spended optimizing it.
+
+""" 
+Trying to optimize every second out of a script is probably not worth our time.
+"""
+
+- How can we make our code more efficient?
+We need to keep in mind that we can't really make our computer to go faster so:
+
+"""
+If we want our code to finish faster, we need to make our computer do less work.
+"""
+To do this we would need to avoid doing work that isn't really needed.
+
+- How?
+· Storing data that was already calculate to avoid calculating it again.
+· Using the right data structures for the problem.
+· Reorganizing the code so that the computer can stay busy while waiting for 
+  information from slow sources, like disk or network.
+
+To know what sources of slowness we need to address, we have to figure out 
+where our code is spending most of its time. 
+There's a bunch of tools that can help us with that called "profilers".
+
+- Profiler:
+A tool that measures the resources that our code is using, giving us a better 
+understanding of what's going on.
+
+In particular, they help us see how the memory is allocated and how the time's 
+spent.
+
+Profilers are programming language specific so, for example:
+· gprof: To analyze a program coded in C.
+· c-Profile: to analyze a Python program.
+
+Using tools like these, we can see:
+· Which functions are called by our program.
+· How many times each function was called.
+· How much time our program spent on each of them.
+
+This way we can find for example, that our program is calling a function more 
+times than we originally intended or that a function that we thought would be 
+fast is actually slow.
+
+To fix our code we will probably need to restructure it to avoid repeating 
+"expensive" actions.
+
+- What expensive means?
+In this context, expensive actions are those that take a long time to complete:
+· Parsing a file.
+· Reading data over the network.
+· Iterating through a whole list.

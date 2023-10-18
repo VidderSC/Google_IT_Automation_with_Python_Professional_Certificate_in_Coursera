@@ -1,0 +1,77 @@
+"""
+If we do an expensive operation inside a loop, we multiply the time it takes to do the expensive operation by the amount of times the loop is repeated.
+"""
+
+Loops are what make our computers do things repeatedly.
+They are an extremely useful tool and let us avoid repetitive work, but we need 
+to use them with caution. In particular, we need to think about what actions 
+we're going to do inside the loop, and when possible, avoid doing expensive 
+actions.
+
+- Example: 
+We're writing a script to send an email to all the employees at our company 
+asking them to verify that their emergency contact information is still valid. 
+
+To send this out, we'll have a loop that sends one email per employee. In the 
+body of the email, we'll include the current emergency contact data.
+
+The interesting part is how we access the data inside the loop.
+If the data is stored in a file, our script will need to parse the file to 
+fetch it. 
+If the script reads the whole file for every user, we'll be wasting a lot of 
+time parsing the file over and over unnecessarily. 
+
+Instead, we could parse the file outside of the loop, put the information into 
+a dictionary, and then use the dictionary to retrieve the data inside the loop.
+
+"""
+We need to make sure that the list of elements that we are iterating through is 
+only as long as it really needs to be.
+"""
+
+- Example:
+Let's say we're running an internal website. As part of the information the 
+site shows, it displays a list of the last five users that logged in.
+
+In the code, the program keeps a list of all the users that have logged in 
+since it last started and when the program needs to display the five latest 
+users, it goes through the whole list and finds out which of those are the five 
+most recent. 
+This wastes a lot of time. If the service has been running for a while, it can 
+take really long to go through the whole list. 
+
+Instead, we could modify the service to store the user access info in log files 
+that can be read if necessary and only keep the last five logins in memory. 
+
+Whenever a new user logs in, the oldest entry in the list gets discarded and a 
+new one gets added. That way, the script doesn't need to go through the whole 
+list every time it needs to display the five most recent users.
+
+"""
+Another thing to remember about loops is to break out of the loop once we have 
+found what we were looking for.
+"""
+
+In Python we use the keyword "break" to do this.
+
+Breaking out of loops means that as soon as the data we're looking for is 
+found, our script can continue.
+
+- Example:
+We're writing a script that checks if a given username is within the list of 
+authorized entities, and if it is, it grants them access to a particular 
+resource. 
+We can use a for loop to iterate through the list of entities. When the u
+sername is found, we can break out of the loop and continue the rest of the 
+script.
+
+One last thing to keep in mind is that the right solution for one problem might 
+not be right for a different problem.
+
+Say our service has a total of 20 users. In that case, it's okay to go over 
+this list whenever we want to check something. It's short enough that we don't 
+need to do any special optimization. 
+But if our service has over a thousand users, we'll want to avoid going through 
+that list unless absolutely necessary. 
+If the service has hundreds of thousands of users, going through that list 
+isn't even a possibility.
