@@ -1,4 +1,4 @@
-#!/usr/bin/env puthon3
+#!/usr/bin/env python3
 
 #  To trigger the error, LANG=en_US.UTF-8
 
