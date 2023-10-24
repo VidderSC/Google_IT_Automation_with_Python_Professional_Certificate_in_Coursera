@@ -1,0 +1,328 @@
+- Internal Server Error:
+
+A colleague has alerted us that a webpage on our Web server isn't working. 
+As we've done before, we need to figure out what this means exactly. We asked 
+our colleague for more details and they told us that the failing webpage is at 
+"site.example.com/blogs". 
+
+Let's check out if this is failing for us as well. 
+The server responded with a 500 error. This error usually means that something 
+on the server side of the application crashed, but we have no idea what. 
+
+We'll need to investigate to find out more information. 
+
+Let's connect to the Web server and try to figure out what's up.
+
+The first step is looking at logs, as we called out on Linux systems, logs are 
+located in "/var/log". 
+To do that, we'll use the "date" command to check the current date: 
+
+"""
+user@webserver$ date
+Thu Jan  9 13:41:09 PST 2020
+"""
+
+Let's change into that directory and check out if there are any recent logs 
+about our error:
+
+"""
+user@webserver$ cd /var/log/
+user@webserver:/var/log$
+"""
+
+and then the "ls -lt" command which sorts the files by the last modified date,
+connecting it to the head command to keep the top 10 lines. 
+
+"""
+user@webserver:/var/log$ ls -lt | head
+total 2420
+-rw-rw-r--  1 root      utmp            292292 Jan  9 13:39 lastlog
+-rw-rw-r--  1 root      utmp              6912 Jan  9 13:39 wtmp
+-rw-r-----  1 syslog    adm               8919 Jan  9 13:39 auth.log
+-rw-r-----  1 syslog    adm                205 Jan  9 13:39 syslog
+drwxr-xr-x  2 root      adm               4096 Jan  9 13:28 nginx
+-rw-r-----  1 syslog    adm              29961 Jan  9 13:28 syslog.1
+drwxr-xr-x  2 root      root              4096 Jan  9 13:28 cups
+-rw-r-----  1 root      root                 0 Jan  9 13:25 site.log
+drwxr-xr-x  2 root      root              4096 Jan  9 13:25 apt
+"""
+
+We just triggered the error, but there doesn't seem to be anything recent in the logs. Just in case, let's check out the last lines in "syslog" using tail.
+
+"""
+user@webserver:/var/log$ tail syslog
+Jan  9 13:28:14 webserver anacron[3669]: Job `cron.daily' terminated
+Jan  9 13:28:14 webserver anacron[3669]: Normal exit (1 job run)
+Jan  9 13:28:12 webserver systemd[1]: Started Session 11 of user user.
+"""
+
+Nope. Nothing interesting here. 
+
+We need to figure out how we can get more information, but we don't even know 
+which web surfing software is being used on this computer. 
+But, we do know that the Web server is running on port 80, the default web 
+serving port. 
+
+- How can we find which software is listening on port 80? 
+We can use the "netstat" command which can give us a bunch of information about 
+our network connections depending on the flags we pass.
+
+This command accesses a bunch of sockets that are restricted to root, the 
+administrator user on Linux. So we'll need to call it with sudo, which lets us 
+run commands as root, and then we'll pass a bunch of flags to netstat.
+
+We'll use: 
+- "-n", to print numerical addresses instead of resolving host names. 
+- "-l", to only check out the sockets that are listening for connection, 
+- "-p", to print the process ID and name to which each socket belongs. 
+
+Since we only care about port 80, we'll connect the output to a "grep" command 
+checking for ":80".
+
+"""
+user@webserver:/var/log$ sudo netstat -nlp | grep :80
+[sudo] password for user:
+tcp     0       0 0.0.0.0:80    0.0.0.0:*       LISTEN  1852/nginx: master
+tcp6    0       0 :::80         :::*            LISTEN  1852/nginx: master
+"""
+
+Good, we got new information. We see that the process listening in port 80 is 
+called "nginx", one of the popular web serving applications out there. 
+
+We now want to check out the configuration for our site. 
+Configuration files on Linux are stored in the "etc" directory. 
+So let's look at "etc/nginx":
+
+"""
+user@webserver:/var/log$ ls -l /etc/nginx/
+total 64
+drwxr-xr-x 2 root root 4096 Aug 20 05:46 conf.d
+-rw-r--r-- 1 root root 1077 Apr  5  2018 fastcgi.conf
+-rw-r--r-- 1 root root 1007 Apr  5  2018 fastcgi_params
+-rw-r--r-- 1 root root 2837 Apr  5  2018 koi-utf
+-rw-r--r-- 1 root root 2223 Apr  5  2018 koi-win
+-rw-r--r-- 1 root root 3957 Apr  5  2018 mime.types
+drwxr-xr-x 2 root root 4096 Aug 20 05:46 modules-available
+drwxr-xr-x 2 root root 4096 Sep 23 09:59 modules-enabled
+-rw-r--r-- 1 root root 1482 Apr  5  2018 ngix.conf
+-rw-r--r-- 1 root root  180 Apr  5  2018 proxy_params
+-rw-r--r-- 1 root root  636 Apr  5  2018 scgi_params
+drwxr-xr-x 2 root root 4096 Sep 23 10:00 sites-available
+drwxr-xr-x 2 root root 4096 Sep 23 10:00 sites-enabled
+drwxr-xr-x 2 root root 4096 Sep 23 09:59 snippets
+-rw-r--r-- 1 root root  664 Apr  5  2018 uwsgi_params
+-rw-r--r-- 1 root root 3071 Apr  5  2018 win-utf
+"""
+
+There's a bunch of files here. Lots of different configuration options that you 
+can set in the Web server. We're looking for the configuration related to a 
+specific site, so let's look at "etc/nginx/sites-enabled".
+
+"""
+user@webserver:/var/log$ ls -l /etc/nginx/sites-enabled/
+total 0
+lrwxrwxrwx 1 root root 34 Sep 23 09:59 default -> /etc/nginx/sites-enabled/default
+lrwxrwxrwx 1 root root 48 Sep 23 10:00 site.example.com.conf -> /etc/nginx/sites-enabled/site.example.com.conf
+"""
+
+There are two files here, one for the "default" site and one for the 
+"site.example.com" site, that's the one we want. 
+Let's open it with the "vi" editor:
+
+"""
+$ vim /etc/nginx/sites-enabled/site.example.com.conf
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name site.example.com
+
+    root /var/www/site.example.com;
+    index index.html
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass 127.0.0.1:3031;
+    }
+}
+"""
+
+There's not a lot here, but at the bottom we see that it says uwsgi_pass, and 
+then the local host address followed by a different port number. 
+It seems that this website isn't being served directly from "nginx", instead, 
+the software is passing the control of the connections to "uwsgi" which is a 
+common solution used to connect a Web server to programs that generate dynamic 
+pages. 
+So let's see if we can find the configuration for that one. 
+
+We'll exit VI with ":q" and then see if there's anything interesting in 
+"etc/uwsgi". 
+
+"""
+user@webserver:/var/log$ ls -l /etc/uwsgi/
+total 8
+drwxr-xr-x 2 root root 4096 Jan  9  2020 apps-available
+drwxr-xr-x 2 root root 4096 Jan  9  2020 apps-enabled
+"""
+
+Here we only see two directories, "apps-available" and "apps-enabled". 
+Let's see what's in "apps-enabled":
+
+"""
+user@webserver:/var/log$ ls -l /etc/uwsgi/apps-enabled/
+total 4
+-rw-r--r-- 1 root root 424 Feb  9  2018 README
+lrwxrwxrwx 1 root root  46 Jan  9  2020 site.example.com.ini -> /etc/uwsgi/apps-available/site.example.com.ini
+"""
+
+We found the "uwsgi" configuration for our site. Let's check it out:
+
+"""
+user@webserver:/var/log$ vi /etc/uwsgi/apps-enabled/site.example.com.ini
+
+[uwsgi]
+chdir = /srv/site.example.com
+uid = www-data
+gid = www-data
+
+plugins = python3
+wsgi-file = prod.py
+callable = app
+
+plugins = logfile
+logger = logs file:/var/log/site.log
+log-route = logs .*
+
+processes = 4
+threads = 2
+socket = 127.0.0.1:3031
+stats = 127.0.0.1:9191
+"""
+
+This file has a lot more information. 
+We see that the main directory for the application is "/srv/site.example.com",
+that the applications run as the "www-data" User and Group, 
+that it's running a Python3 script called "prod.py" 
+that the log is stored in "/var/log/site.log" and a bunch of other things. 
+
+Let's use this extra information and see if we can find out what's that. 
+Let's exit with ":q" once more and then check out that log file:
+
+"""
+user@webserver:/var/log$ ls -l site.log
+-rw-r----- 1 root root 0 Jan  9 13:25 site.log
+"""
+
+The log file has a size of zero, that doesn't seem right. 
+Let's see if we can find out anything else by looking at the Python script 
+that's executed by "uwsgi" in "/srv/site.example.com/prod.py":
+
+"""
+user@webserver:/var/log$ vi /srv/site.example.com/prod.py
+(see 04_prod.py)
+"""
+
+There's a few different webpages configured in this file. 
+It uses "bottle" which is a Python module to generate dynamic web pages. 
+At the bottom, we see the configuration for the logs page that's currently 
+failing. 
+A colleague left a comment saying that we can get debugging information by 
+uncommenting the line that calls "bottle.debug". That's exactly what we need.
+
+To uncomment this line, we need to have write access to the file though, and 
+"vi" is open in read-only mode currently. 
+Let's exit and open again with "sudo" to be able to modify it.
+
+"""
+user@webserver:/var/log$ sudo vi /srv/site.example.com/prod.py
+(see 04_prod.py)
+"""
+
+Okay. We've made the change, let's save it with ":wq" and reload "uwsgi" as 
+the instructions say:
+
+"""
+user@webserver:/var/log$ sudo service uwsgi reload
+"""
+
+We've added debugging information. Hopefully, that will tell us why the pages 
+failing. Let's reload the website and see what happens.
+
+"""
+- Error: 500 Internal Server Error
+  Sorry, the requested URL 'http://site.example.com/logs' caused an error:
+  Interal Server Error
+
+- Exception:
+  PermissionError(13, 'Permission denied')
+
+- Traceback:
+  Traceback (most recent call last):
+    File "/usr/lib/python3/dist-packages/bottle.py", line 862, in _handle
+      return route.call(**args)
+    File "/usr/lib/python3/dist-packages/bottle.py", line 1740, in wrapper
+      rv = callback(*a, **ka)
+    File "prod.py", line 25, in logs
+      with open(LOGFILE) as f:
+  PermissionError: [Errno 13] Permission denied: '/var/log/site.log'
+"""
+
+This time we see a traceback of the error and we see that the issue is that
+the application is getting a "permission denied" error when trying to open 
+"/var/log/site.log". 
+
+Remember that we thought it was weird that the file was empty, it seems that 
+it's somehow broken. Let's look at it again, this time let's check if there are 
+any other files that start with site.
+
+"""
+user@webserver:/var/log$ ls -l site*
+-rw-r----- 1 root     root          0 Jan  9 13:25 site.log
+-rw-r----- 1 www-data www-data 203416 Jan  9 13:25 site.log.1
+"""
+
+So there's a "site.log" file and a "site.log.1" file. 
+That's pretty common when using log rotate to rotate the logs and avoid them 
+getting too big. But there's something else afoot here. 
+See how one file belongs to the "root" user and the other belongs to 
+the "www-data" user. 
+
+If you look at the permissions of the file, you might notice that they are set 
+to allow the owner to write them and the owner and the group to read them, but 
+the rest of the users can't access them. 
+
+We saw earlier that the application is running with the "www-data" user. 
+So if "site.log" belongs to the root user, the application won't be able to 
+either read or write to this log file. 
+
+It seems like we found the root cause of our issue. 
+Let's change the owner of the "site.log" file to fix the immediate problem.
+
+"""
+user@webserver:/var/log$ sudo chown www-data.www-data site.log
+"""
+
+Let's try reloading our page now.
+
+It works! The log is empty now because the application have not been able to 
+write to it. But if we keep reloading, we'll see how it populates with our 
+entries.
+
+"""
+Recent logs
+-------------------------------------------------------------------------------
+[pid: 4748|app: 0|req: 1/2] 192.168.122.1 () {42 vars in 751 bytes} [Thu Jan  9 14:03:18 2020] GET /logs => generated 99 bytes in 1 msecs (HTTP/1.1 200) 2 headers
+[pid: 4749|app: 0|req: 1/3] 192.168.122.1 () {42 vars in 751 bytes} [Thu Jan  9 14:03:35 2020] GET /logs => generated 297 bytes in 1 msecs (HTTP/1.1 200) 2 headers
+[pid: 4748|app: 0|req: 2/4] 192.168.122.1 () {42 vars in 751 bytes} [Thu Jan  9 14:03:35 2020] GET /logs => generated 496 bytes in 0 msecs (HTTP/1.1 200) 2 headers
+[pid: 4751|app: 0|req: 2/5] 192.168.122.1 () {42 vars in 751 bytes} [Thu Jan  9 14:03:35 2020] GET /logs => generated 695 bytes in 0 msecs (HTTP/1.1 200) 2 headers
+[pid: 4749|app: 0|req: 2/6] 192.168.122.1 () {42 vars in 751 bytes} [Thu Jan  9 14:03:36 2020] GET /logs => generated 894 bytes in 0 msecs (HTTP/1.1 200) 2 headers
+-------------------------------------------------------------------------------
+"""
+
+We've fixed the immediate problem, our webpage is working once again, but we 
+still need to take care of the long-term remediation. 
+
+- Why was the ownership of the file wrong? 
+We suspect that there might be something wrong with the log rotate 
+configuration, but we'd need to keep looking to find out what's up with that.
