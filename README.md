@@ -1,9 +1,9 @@
-# Google_IT_Automation_with_Python_Professional_Certificate_in_Coursera
-Google IT Automation with Python Professional Certificate in Coursera
+# Google IT Automation with Python Professional Certificate in Coursera
 
-Here I will save the progress and files that I will be creating while following the course. 
-[!NOTE]
-These files are not required to be created and I'm just doing it so I have them recorded somewhere.
+Here I will save the progress and files that I will be creating while following the course.
+
+> [!NOTE]
+> These files are not required to be created and I'm just doing it so I have them recorded somewhere.
 
 You are welcome to check them if you like.
 
