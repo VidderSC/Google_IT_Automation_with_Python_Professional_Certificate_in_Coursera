@@ -1,0 +1,124 @@
+- Unhandled Errors and Exceptions:
+
+Correctly handling memory is a hard problem and that's why there's a bunch of 
+different programming languages like "Python", "Java", or "Ruby" that do it for 
+us. 
+
+But that doesn't mean programs written in these languages can't trigger weird 
+problems. In these languages, when a program comes across an unexpected 
+condition that isn't correctly handled in the code, it will trigger errors or 
+exceptions. 
+
+In Python, for example, we could get an "IndexError" if we tried to access an 
+element after the end of a list. 
+We might get a "TypeError" or an "AttributeError" if we try to take an action 
+on a variable that wasn't properly initialized or "DivisionByZeroError" if we 
+tried to divide by zero. 
+
+When the code generates one of these errors without handling it properly, the 
+program will finish unexpectedly. In general, unhandled errors happen because 
+the codes making wrong assumptions: 
+- The program's trying to access a resource that's not present
+- The code assumes that the user will enter a value but the user entered an
+  empty string instead. 
+- The application is trying to convert a value from one format to another and 
+  the value doesn't match the initial expectations. 
+  
+When these failures happen, the interpreter that's running the program will 
+print the type of error, the line that caused the failure, and the traceback. 
+
+"""
+- Traceback:
+Shows the lines of the different functions that were being executed when the 
+problem happened. 
+"""
+
+In lots of cases, the error message and traceback info already gives us enough 
+to understand what's going on, and we can move on to solving the problem. 
+Sadly, that's not always the case. 
+The fact that a piece of code crashes on one function doesn't mean that the 
+error is necessarily in that function. 
+
+It's possible, for example, that the problem was caused by a function called 
+earlier which set a variable to a bad value, so the function where the code 
+crashes is just accessing that variable. 
+When the error message isn't enough, we'll need to debug the code to find out 
+where things are going wrong. 
+
+For that, we can use the debugging tools available for the application's 
+language. For a Python program we can use the "PDB" interactive debugger which 
+lets us do all the typical debugging actions like:
+- Executing lines of code one-by-one,
+- Looking at how the variables change values. 
+
+When we're trying to understand what's up with a misbehaving function on top of 
+using debuggers, it's common practice to add statements that print data related 
+to the codes execution. 
+Statements like these could:
+- Show the contents of variables,
+- The return values of functions, 
+- Metadata like the length of a list or size of a file. 
+
+This technique is called "printf debugging". 
+The name comes from the "printf" function used to print messages to the screen 
+in the "C" programming language. But we can use this technique in all 
+languages, no matter if we use "print", "puts", or "echo" to display the text 
+on the screen. 
+
+When changing code to print messages to the screen, the best approach is to add 
+the messages in a way that can be easily enabled or disabled depending on 
+whether we want the debug info or not.
+
+In Python, we can do this using the "logging" module. 
+This module, lets us set how comprehensive we want our code to be. 
+We can say whether we want to include all debug messages, or only info warning 
+or error messages. 
+Then when printing the message, we specify what type of message we're printing. 
+That way, we can change the debug level with a flag or configuration setting. 
+
+Say you've figured out why the unexpected exception was thrown, 
+
+- What do you do next? 
+The solution might be fixing the programming error like making sure variables 
+are initialized before they're used or that the code doesn't try to access 
+elements after the end of a list. 
+Or it could be that, certain use cases that hadn't been considered needs to be 
+added to the code. 
+
+In general, you'll want to make the program more resilient to failures. 
+Instead of crashing unexpectedly, you want the program to inform the user of 
+the problem and tell them what they need to do. 
+
+- Example: 
+You have an application that crashes with a "permission denied error". 
+Rather than the program finishing unexpectedly, you'll want to modify the code 
+to catch that error and tell the user what the permission problem is, so they 
+can fix it. 
+  - For example: "Unable to write new files and temp, make sure your user has
+    right permissions on temp." 
+
+In some cases, it doesn't make sense for our program to even run if certain 
+conditions aren't met. In that case, it's okay for the program to finish when 
+the error is triggered. But again, it should do so in a way that tells the user 
+what to do to fix the problem. 
+  - For example: 
+    If it's critical for an application to connect to a database, but the 
+    database server isn't responding, it makes sense for the application to 
+    finish with an error saying "unable to connect to the database server".
+
+It also makes sense to include all details of the attempted connection like:
+- The host name, 
+- The port,
+- The username used to connect. 
+
+
+- Let's recap: 
+If your program is crashing with an unhandled error:
+- You want to first do some debugging to figure out what's causing the issue.
+
+Once you figured it out:
+- You want to make sure that you fix any programming errors and that you catch 
+  any conditions that may trigger an error.
+
+This way, you can make sure the program doesn't crash and leave your users 
+frustrated.
