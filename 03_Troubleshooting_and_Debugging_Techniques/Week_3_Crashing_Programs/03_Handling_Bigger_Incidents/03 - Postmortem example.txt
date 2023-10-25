@@ -1,0 +1,31 @@
+Postmortem: External network down
+Date: 2020-01-06
+
+
+- Executive Summary
+
+Impact: The network connection was down and nobody could access the internet 
+        for 2 hours.
+Root Cause: A misconfiguration in our main router caused all traffic to be sent
+            to a void.
+Action Items: The bad configuration was rolled back. Improved testing to avoid
+              this in the future is being developed.
+
+
+- Root Causes and Trigger
+
+With change #275643, we intended to deploy traffic shaping to our router. However, there was a typo in the rules that caused the router to error out with syntax error and deny all traffic instead.
+
+The change was created in advance and put into the release pipeline. This meant that there was a significant delay between the commit and the outage, causing some confusion as to why it had happened.
+
+When the outage happened, it took a while to understand what was going on, because we had no internet access to help us figure it out.
+
+
+- Lessons Learned
+
+Things that went well:
+    · Our monitoring detected the problem really quickly
+    · Once we understood the problem, we were able to roll back to the previous 
+      known version.
+    ...
+...
