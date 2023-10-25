@@ -6,19 +6,15 @@ Learn in-demand skills like Python :snake:, Git, and IT automation to advance yo
 
 
 ## Professional Certificate - 6 course series
-**Platform**
+**Platform:**
 Coursera.
-
-**Rating**
+**Rating:**
 4.8 :star: (34.895 reviews).
-
-**Beginner level**
+**Beginner level:**
 No previous experience necessary.
-
-**Duration**
+**Duration:**
 6 months (10h/week).
-
-**Flexible schedule**
+**Flexible schedule:**
 Learn at your own pace.
 
 
