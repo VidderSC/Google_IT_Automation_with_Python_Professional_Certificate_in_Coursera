@@ -3,16 +3,19 @@ Learn in-demand skills like Python :snake:, Git, and IT automation to advance yo
 
 - :sa: Taught in English.
 - Instructor: Google Career Certificates.
-- Platform: Coursera.
+
 
 ## Professional Certificate - 6 course series
+*Platform* 
+Coursera
+*Rating*
 4.8 :star: (34.895 reviews)
-
-#### Beginner level
-- No previous experience necessary
-#### 6 months at 10 hours a week
-#### Flexible schedule
-- Learn at your own pace
+*Beginner level*
+No previous experience necessary
+*Duration*
+6 months (10h/week)
+*Flexible schedule*
+Learn at your own pace
 
 
 ## What we will learn:
