@@ -15,9 +15,9 @@ def get_start_date():
     print('Getting the first start date to query for.')
     print()
     print('The date must be greater than Jan 1st, 2018')
-    year = input('Enter a value for the year: ')
-    month = input('Enter a value for the month: ')
-    day = input('Enter a value for the day: ')
+    year = int(input('Enter a value for the year: '))
+    month = int(input('Enter a value for the month: '))
+    day = int(input('Enter a value for the day: '))
     print()
 
     return datetime.datetime(year, month, day)
