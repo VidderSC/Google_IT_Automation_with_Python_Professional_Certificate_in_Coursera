@@ -112,7 +112,13 @@ The problem with the script is that it’s downloading the whole file and then g
 
 To check the execution time of a script, add a prefix "time" and run the script.
 
-$ time ./test.py
+"""
+$ time ./start_date_report.py
+...
+real    0m23.138s
+user    0m3.567s
+sys     0m0.147s
+"""
 
 In order to fix this issue, open the "start_date_report.py" script using nano editor. Now, modify the "get_same_or_newer()" function to preprocess the file, so that the output generated can be used for various dates instead of just one.
 
