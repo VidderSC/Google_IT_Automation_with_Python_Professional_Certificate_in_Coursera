@@ -27,7 +27,7 @@ There are 6 courses included, each of them with their own certificate:
 - :ballot_box_with_check: Using Python to Interact with the Operating System.  ([Cert.](https://coursera.org/verify/7ZT3HXJFJF5F))
 - :ballot_box_with_check: Introduction to Git and GitHub.  ([Cert.](https://coursera.org/verify/99D85T5J4EZP))
 - :ballot_box_with_check: Troubleshooting and Debugging Techniques. ([Cert.](https://coursera.org/verify/B2JC9QJ35B6W))
-- :unlock: Configuration Management and the Cloud.
+- :unlock: Configuration Management and the Cloud. (In progress..)
 - :lock: Automating Real-World Tasks with Python.
 
 ### Notes:
