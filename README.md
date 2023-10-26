@@ -3,7 +3,6 @@
 ## Professional Certificate - 6 course series
 - Platform: **Coursera**
 - **Beginner level**, no previous experience necessary
-- :sa: Taught in **English**
 - Instructor: **Google Career Certificates**
 
 ## What we will learn:
