@@ -8,6 +8,8 @@ import requests
 
 FILE_URL = "https://storage.googleapis.com/gwg-content/gic215/employees-with-date.csv"
 
+data_dict = None
+
 def get_start_date():
     """Interactively get the start date to query for."""
 
@@ -35,37 +37,32 @@ def get_file_lines(url):
 
 def get_same_or_newer(start_date):
     """Returns the employees that started on the given date, or the closest one."""
-    data = get_file_lines(FILE_URL)
-    reader = csv.reader(data[1:])
+    global data_dict
+    
+    if data_dict is None:
+        data = get_file_lines(FILE_URL)
+        reader = csv.reader(data[1:])
 
-    # We want all employees that started at the same date or the closest newer
-    # date. To calculate that, we go through all the data and find the
-    # employees that started on the smallest date that's equal or bigger than
-    # the given start date.
-    min_date = datetime.datetime.today()
-    min_date_employees = []
-    for row in reader:
-        row_date = datetime.datetime.strptime(row[3], '%Y-%m-%d')
+        data_dict = {}
 
-        # If this date is smaller than the one we're looking for,
-        # we skip this row
-        if row_date < start_date:
-            continue
+        for row in reader:
+            row_date = datetime.datetime.strptime(row[3], '%Y-%m-%d')
+            if row_date not in data_dict:
+                data_dict[row_date] = []
+            data_dict[row_date].append(f"{row[0]} {row[1]}")
+    
+    closest_dates = []
+    for date in sorted(data_dict.keys()):
+        if date >= start_date:
+            closest_dates.append(date)
 
-        # If this date is smaller than the current minimum,
-        # we pick it as the new minimum, resetting the list of
-        # employees at the minimal date.
-        if row_date < min_date:
-            min_date = row_date
-            min_date_employees = []
-
-        # If this date is the same as the current minimum,
-        # we add the employee in this row to the list of
-        # employees at the minimal date.
-        if row_date == min_date:
-            min_date_employees.append("{} {}".format(row[0], row[1]))
-
-    return min_date, min_date_employees
+    if closest_dates:
+        closest_date = closest_dates[0]
+        employees = data_dict[closest_date]
+        return closest_date, employees
+    else:
+        closest_date = datetime.datetime.today()
+        return closest_date, []
 
 def list_newer(start_date):
     while start_date < datetime.datetime.today():

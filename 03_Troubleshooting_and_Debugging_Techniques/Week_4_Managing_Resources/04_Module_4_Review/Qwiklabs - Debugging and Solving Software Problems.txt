@@ -129,9 +129,8 @@ This is a pretty challenging task that you have to complete by modifying the "ge
 Here are few hints to fix this issue:
 1. Download the file only once from the URL.
 2. Pre-process it so that the same calculation doesn't need to be done over and over again. This can be done in two ways. You can choose any one of them:
-
-· To create a dictionary with the start dates and then use the data in the dictionary instead of the complicated calculation.
-· To sort the data by start_date and then go date by date.
+    · To create a dictionary with the start dates and then use the data in the dictionary instead of the complicated calculation.
+    · To sort the data by start_date and then go date by date.
 
 Choose any one of the above preprocessing options and modify the script accordingly.
 
