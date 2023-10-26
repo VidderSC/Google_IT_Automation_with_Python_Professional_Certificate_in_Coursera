@@ -1,17 +1,10 @@
 # Google IT Automation with Python Professional Certificate
-Learn in-demand skills like Python :snake:, Git, and IT automation to advance your career.
-
-- :sa: Taught in English
-- Instructor: **Google Career Certificates**
-
 
 ## Professional Certificate - 6 course series
 - Platform: **Coursera**
-- **Rating:** 4.8 :star: (34.895 reviews)
 - **Beginner level**, no previous experience necessary
-- **Duration:** 6 months (10h/week)
-- **Flexible schedule**, learn at your own pace
-
+- :sa: Taught in **English**
+- Instructor: **Google Career Certificates**
 
 ## What we will learn:
 - Automate tasks by writing Python scripts
