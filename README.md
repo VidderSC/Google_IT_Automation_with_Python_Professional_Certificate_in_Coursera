@@ -22,12 +22,12 @@
 
 ## Courses included in this Certificate 
 There are 6 courses included, each of them with their own certificate:
-- :ballot_box_with_check: Crash Course on Python.  ([Cert.](https://coursera.org/verify/PSLM4Y9NGPUT))
-- :ballot_box_with_check: Using Python to Interact with the Operating System.  ([Cert.](https://coursera.org/verify/7ZT3HXJFJF5F))
-- :ballot_box_with_check: Introduction to Git and GitHub.  ([Cert.](https://coursera.org/verify/99D85T5J4EZP))
-- :ballot_box_with_check: Troubleshooting and Debugging Techniques. ([Cert.](https://coursera.org/verify/B2JC9QJ35B6W))
-- :unlock: Configuration Management and the Cloud. (In progress..)
-- :lock: Automating Real-World Tasks with Python.
+- :ballot_box_with_check: 01. Crash Course on Python.  ([Cert.](https://coursera.org/verify/PSLM4Y9NGPUT))
+- :ballot_box_with_check: 02. Using Python to Interact with the Operating System.  ([Cert.](https://coursera.org/verify/7ZT3HXJFJF5F))
+- :ballot_box_with_check: 03. Introduction to Git and GitHub.  ([Cert.](https://coursera.org/verify/99D85T5J4EZP))
+- :ballot_box_with_check: 04. Troubleshooting and Debugging Techniques. ([Cert.](https://coursera.org/verify/B2JC9QJ35B6W))
+- :unlock: 05. Configuration Management and the Cloud. (In progress..)
+- :lock: 06. Automating Real-World Tasks with Python.
 
 ### Notes:
 **_You will NOT receive a certificate if you follow this course on my GitHub repo._**
