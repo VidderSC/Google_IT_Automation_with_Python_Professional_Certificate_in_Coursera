@@ -1,0 +1,47 @@
+- Puppet Classes:
+
+In the examples of Puppet code that we've seen so far, we've declared classes that contain one resource. 
+
+You might have wondered what those classes were for. We use these classes to collect the resources that are needed to achieve a goal in a single place. 
+
+For example, you could have a class that installs a package, sets the contents of a configuration file, and starts the service provided by that package. 
+
+Let's check out an example like that:
+
+"""
+class ntp {
+    package { 'ntp':
+        ensure => latest,
+    }
+    file { 'etc/ntp.conf':
+        source => 'puppet://modules/ntp/ntp.conf'
+        replace => true,
+    }
+    service { 'ntp':
+        enable => true,
+        ensure => running,
+    }
+}
+"""
+
+In this case, we have a class with three resources: 
+- Package,
+- File,
+- Service. 
+All of them are related to the "Network Time Protocol", or "NTP", the mechanism our computers use to synchronize the clocks. 
+
+Our rules are making sure that: 
+- The NTP package is always upgraded to the latest version.
+- The contents of the configuration file using the source attribute, which 
+  means that the agent will read the required contents from the specified location. 
+- And that we want the NTP service to be "enabled" and "running". 
+
+By grouping all of the resources related to NTP in the same class, we only need a quick glance to understand how the service is configured and how it's supposed to work. This would make it easier to make changes in the future since we have all the related resources together. 
+
+It makes sense to use this technique whenever we want to group related resources. For example: 
+- You could have a class grouping all resources related to managing log files, 
+  or configuring the time zone, or handling temporary files and directories. 
+- You could also have classes that group all the settings related to your web 
+  serving software, your email infrastructure, or even your company's firewall.
+
+We're just getting started with Puppet's basic resources and seeing how they can be applied. In further modules we'll be learning a lot more about common practices when using configuration management tools.
