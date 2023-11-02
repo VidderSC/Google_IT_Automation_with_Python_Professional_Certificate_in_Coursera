@@ -1,0 +1,105 @@
+- Applying Rules Locally:
+
+Up to now we've been getting to know Puppet syntax and understanding the different resources available. It's now time for the next step, trying out some Puppet rules on our local computer. 
+
+In an earlier module, we called out that Puppet is usually deployed in a client-server architecture. But that's not the only way we can use Puppet. 
+We can also use it as a stand-alone application run from the command line. This is common when testing new configurations. 
+It can be the preferred configuration for complex setups where connecting to a master is no longer the best approach. When using a stand-alone Puppet, the same computer processes the facts, calculates the rules that need to be applied, and makes any necessary changes locally. 
+
+So to get started with our Puppet deployment, let's first install Puppet and then we can start experimenting with running rules locally. 
+
+In later modules, we'll check out how to create a client-server deployments. As we've called out, Puppet is available on a number of different platforms. 
+We can either install it from the package management system available in the OS or download it from the official website. Both options work fine and the best one to choose will depend on our specific needs. 
+
+For this exercise, we'll just go with the Puppet packages provided by the Ubuntu distribution. 
+We'll do that by installing the Puppet master package using:
+
+"""
+$ sudo apt install puppet-master
+"""
+
+We now have the package installed and can start trying out a few rules. We'll begin by creating the simplest possible Puppet file. We can make it more complex as we improve our deployments. 
+
+For this example, we want to use Puppet to make sure that some useful tools for debugging problems are installed on each computer in our fleet. 
+To do this, we first have to create a file where we'll store the rules that we want to apply. 
+In Puppet lingo, these files are called manifests and they must end with a 
+".pp" extension. So we'll create a new file called "tools.pp" and in this file, we'll create a package resource. 
+
+"""
+$ vim tools.pp
+"""
+
+We'll start by managing the "htop" package which is a tool similar to "top" that can show us some extra information. 
+We'll state that we want "Puppet" to ensure that we have this package present on our computer. 
+
+"""
+package { 'htop':
+  ensure => present,
+}
+"""
+
+That's all we have to do. This resource will take care of installing the package for us. Let's save the file and try it out. But before actually applying the rules, we want to check that the command isn't present yet.
+"""
+$ htop
+
+Command 'htop' not found, but can be installed with:
+
+sudo snap install htop  # version 2.2.0, or
+sudo apt  install htop  # version 2.2.0-1
+
+See 'snap info htop' for additional versions.
+"""
+
+It isn't installed yet. Let's fix that by running our rules using:
+
+"""
+$ sudo puppet apply -v tools.pp
+
+Notice: Compiled catalog for ubuntu in environment production in 0.17 seconds
+Info: Applying configuration version '1698959904'
+Notice: /Stage[main]/Main/Package[htop]/ensure: created
+Notice: Applied catalog in 2.05 seconds
+"""
+
+The "-v" flag tells Puppet that we want to get verbose output which will tell us what's going on while Puppet is applying the rules in the file that we pass to it. 
+Puppet is telling us that:
+· It compiled a catalog. 
+· It was applying the current configuration. 
+· It installed the package we requested.
+· It let us know that it finished applying this catalog. 
+
+- What's a catalog? 
+After loading all facts for a computer, the server calculates which rules actually need to be applied. 
+
+For example, if a packet should only be installed when a certain condition is met, this condition is evaluated on the server side based on the gathered facts. 
+
+- Catalog: 
+The list of rules that are generated for one specific computer once the server has evaluated all variables, conditionals, and functions.
+
+In this example, the catalog will be exactly the same as our code because the code didn't include any variables, functions, or conditionals. 
+More complex sets of rules can lead to different catalogs depending on fact values. 
+
+It's now time to check if our rules actually works. 
+Let's try running the "htop" command again now that Puppet has installed it for us.
+
+"""
+$ htop
+
+"""
+
+Yes, this time it worked. If our computer was misbehaving, we could now use this tool to get a better idea why. But fortunately, our computer's on its best behavior. So we'll exit now using q. 
+
+Let's see what happens if we try to apply the Puppet rules again now that the package is installed.
+
+"""
+$ sudo puppet apply -v tools.pp
+
+Notice: Compiled catalog for desktop-win10 in environment production in 0.17 seconds
+Info: Applying configuration version '1698960181'
+Notice: Applied catalog in 0.02 seconds
+"""
+
+Puppet's smart. It noticed that the package is already installed so it didn't try to install the package again. 
+This means it applied the catalog much faster because nothing had to be changed. 
+
+We've now seen how to write a Puppet resource in a manifest file and then use puppet apply to apply those rules to one computer. 

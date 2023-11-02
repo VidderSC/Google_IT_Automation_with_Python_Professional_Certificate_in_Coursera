@@ -1,0 +1,160 @@
+- Organizing Your Puppet Modules:
+
+In any configuration management deployment, there's usually a lot of different things to manage. 
+
+We might want to: 
+· Install some packages, 
+· Copy some configuration files, 
+· Start some services, 
+· Schedule some periodic tasks, 
+· Make sure some users and groups are created,
+· Have access to specific devices, 
+· Execute a few commands that aren't provided by existing resources. 
+
+On top of that, there might be different configurations applied to the different computers in the fleet. For example, workstations and laptops might include resources that aren't used on servers. Each distinct type of server will need its own specific setup.
+
+There's a lot of different things to manage. We need to organize all these resources and information in a way that helps us maintain them long-term. 
+
+This means grouping related resources, giving the groups good names, and making sure that the organization will make sense to new users. 
+
+In puppet, we organize our manifests into modules. 
+
+- Module: 
+A collection of manifests and associated data. 
+
+We can put any resource we want into a module, but to keep our configuration management organized, we'll group things together under a sensible topic. 
+
+For example, we could have:
+· A module for everything related to monitoring the computer's health, 
+· One for setting up the network stack, 
+· Another one for configuring a web serving application. 
+
+So the module ship the manifest in the associated data but, 
+
+- How is this organized? 
+All manifests gets stored in a directory called manifests. 
+
+The rest of the data is stored in different directories depending on what it does:
+· The "files" directory includes files that are copied into the client machines 
+  without any changes, like the "ntp.conf" file that we saw in our last module. 
+· The "template" directory includes files that are preprocessed before they've 
+  been copied into the client machines. These templates can include values that get replaced after calculating the manifests, or sections that are only present if certain conditions are valid. 
+
+There's a bunch more directories that can be part of a module depending on what exactly the module does. But you don't need to worry about these when creating your first puppet module. 
+
+You can start with the simple module that just has one manifest in the "Manifest" directory. 
+This file should be called "init.pp" and it should define a class with the same name as the module that you're creating. 
+Then any files that your rules use need to be stored in the "files" or "templates" directories depending on whether you copy them directly or need to preprocess them. 
+
+For example, this is how the NTP class that we saw in our last video looks like when turned into a module:
+
+"""
+$ tree modules/
+
+modules/
+    ntp
+        files
+            ntp.conf
+        manifests
+            init.pp
+
+3 directories, 2 files
+"""
+
+There's an "init.pp" file, which contains the "ntp" class that we saw before, and the "ntp.conf" file that gets deployed onto the machine is now stored in the files directory. 
+
+Modules like these can look pretty much the same no matter who's using them. That's why over time, system administrators using puppet have shared the modules they've written, letting others use the same rules. 
+
+By now, there's a large collection of prepackaged modules that are shipped and ready to use. If one of those modules does what we want, we can just install it on our Puppet server and use it in our deployments. 
+
+Let's install the Apache module provided by Puppet Labs to check out how this works.
+
+"""
+$ sudo apt install puppet-module-puppetlabs-apache
+"""
+
+We've installed the module. Let's have a quick look at its contents. First, we'll change into the directory where the module files are stored and list its contents.
+
+"""
+$ cd /usr/share/puppet/modules.available/puppetlabs-apache/
+$ ls -l
+
+total 28
+drwxr-xr-x  2 root root 4096 Nov  2 23:29 files
+drwxr-xr-x  4 root root 4096 Nov  2 23:29 lib
+drwxr-xr-x 10 root root 4096 Nov  2 23:29 manifests
+-rw-r--r--  1 root root 1877 Jul  3  2020 metadata.json
+drwxr-xr-x  2 root root 4096 Nov  2 23:29 tasks
+drwxr-xr-x  6 root root 4096 Nov  2 23:29 templates
+drwxr-xr-x  2 root root 4096 Nov  2 23:29 types
+"""
+
+We see the "files", "manifests", and "templates" directories that we mentioned. On top of that, there's a "lib" directory that adds functions and fact to the ones already shipped by puppet. The "metadata.json" file includes some additional data about the module we just installed, like which versions of which operating systems it's compatible with. 
+
+Let's peek into the "manifests" directory:
+
+"""
+$ ls -l manifests/
+
+total 324
+-rw-r--r-- 1 root root   3601 Jul  3  2020 balancer.pp
+-rw-r--r-- 1 root root   1892 Jul  3  2020 balancermember.pp
+drwxr-xr-x 2 root root   4096 Nov  2 23:29 confd
+-rw-r--r-- 1 root root   4100 Jul  3  2020 custom_config.pp
+-rw-r--r-- 1 root root    359 Jul  3  2020 default_confd_files.pp
+drwxr-xr-x 2 root root   4096 Nov  2 23:29 default_mods
+-rw-r--r-- 1 root root   5671 Jul  3  2020 default_mods.pp
+-rw-r--r-- 1 root root    863 Jul  3  2020 dev.pp
+drwxr-xr-x 2 root root   4096 Nov  2 23:29 fastcgi
+-rw-r--r-- 1 root root  38602 Jul  3  2020 init.pp
+-rw-r--r-- 1 root root    501 Jul  3  2020 listen.pp
+drwxr-xr-x 2 root root   4096 Nov  2 23:29 mod
+-rw-r--r-- 1 root root   6668 Jul  3  2020 mod.pp
+drwxr-xr-x 2 root root   4096 Nov  2 23:29 mpm
+-rw-r--r-- 1 root root   4974 Jul  3  2020 mpm.pp
+-rw-r--r-- 1 root root    497 Jul  3  2020 namevirtualhost.pp
+-rw-r--r-- 1 root root    911 Jul  3  2020 package.pp
+-rw-r--r-- 1 root root  36509 Jul  3  2020 params.pp
+drwxr-xr-x 2 root root   4096 Nov  2 23:29 peruser
+-rw-r--r-- 1 root root    229 Jul  3  2020 php.pp
+-rw-r--r-- 1 root root    247 Jul  3  2020 proxy.pp
+-rw-r--r-- 1 root root    315 Jul  3  2020 python.pp
+drwxr-xr-x 2 root root   4096 Nov  2 23:29 security
+-rw-r--r-- 1 root root    995 Jul  3  2020 service.pp
+-rw-r--r-- 1 root root    235 Jul  3  2020 ssl.pp
+-rw-r--r-- 1 root root   1682 Jul  3  2020 version.pp
+drwxr-xr-x 2 root root   4096 Nov  2 23:29 vhost
+-rw-r--r-- 1 root root 127179 Jul  3  2020 vhost.pp
+-rw-r--r-- 1 root root    782 Jul  3  2020 vhosts.pp
+"""
+
+That's a lot of files, like how we split the different things that we want to manage into separate modules. We can also split each separate functionality that we want to configure into separate manifests. 
+This helps us organize our code when we make changes to it, and to see how this directory also contains its own "init.pp". 
+
+As we called out, this manifest is special. It needs to always be present because it's the first one that's read by puppet when a module gets included. 
+
+- How do we include a module like this one? 
+It's pretty easy. Let's create a manifest file that includes the module we've just installed.
+
+"""
+$ cd
+$ vim webserver.pp
+"""
+
+"""
+include ::apache
+"""
+
+Here, we're telling Puppet to include the Apache module. The double colon before the module name, let's puppet know that this is a global module. 
+
+Let's save this file now and apply it using Puppet apply like we did before.
+
+"""
+$ sudo puppet apply -v webserver.pp
+
+"""
+
+Our manifest was super-simple, it just include the Apache module. But by including the module, we got puppet to apply all the rules run by default in the module. 
+We now have an Apache server configured and ready to run on this machine. 
+
+We've just seen how we can organize our code in modules and how we can even use modules provided by other teams so we don't have to reinvent the wheel.
