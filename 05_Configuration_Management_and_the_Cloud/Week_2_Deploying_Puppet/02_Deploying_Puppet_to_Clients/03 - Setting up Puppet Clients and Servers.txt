@@ -1,0 +1,147 @@
+- Setting up Puppet Clients and Servers:
+
+We're now ready to see a Puppet deployment in action. 
+
+We've already installed the Puppet master package on this computer, so we'll use it as the master. Since this is a test deployment to demonstrate Puppet, we'll configure it to automatically sign the certificate requests of the nodes we add. But remember, if we were deploying this to real computers, we'd have to manually sign the requests or implement a proper validating script. 
+
+We'll do this by calling the Puppet command with the config parameter, and then saying that in this section master we want to set auto sign to true. 
+
+"""
+$ sudo puppet config --section master set autosign true
+"""
+
+With that, we can connect to the client that we want to manage using Puppet. 
+
+We'll connect using SSH to a machine called webserver. 
+
+"""
+$ ssh webserver
+"""
+
+On this machine, we'll install the Puppet client which is shipped by the Puppet package.
+
+"""
+$sudo apt install puppet
+"""
+
+We have the Puppet agent installed. Now we need to configure it to talk to the Puppet server that we're running on the other machine. To do that, we'll use "Puppet config" like before but this time we'll tell it that we want to set the server to "ubuntu.example.com".
+
+"""
+$ sudo puppet config set server ubuntu.example.com
+"""
+
+Now that we've configured the server, we can test the connection to the Puppet master by using the "Puppet agent" command passing "-v" as before to get verbose output, and "--test" to do a test run. 
+
+"""
+$ sudo puppet agent -v --test
+
+Info: Creating a new SSL key for webserver.example.com
+Info: Caching certificate for ca
+Info: csr_attributes file loading from /etc/puppet/csr_attributes.yaml
+Info: Creating a new SSL certificate request for webserver.example.com
+Info: Certificate Request fingerprint (SHA256): 0E:E1:73...
+Info: Caching certificate for webserver.example.com
+Info: Caching certificate_revocation_list for ca
+Info: Caching certificate for ca
+Info: Using configured environment 'production'
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Retrieving locales
+Info: Loading facts
+Info: Caching catalog for webserver.example.com
+Info: Applying configuration version '1575651019'
+Notice: Applied catalog in 0.07 seconds
+"""
+
+As usual, Puppet tells us everything it did:
+· First created an SSL key for the machine. 
+· Then read a bunch of information from the machine
+· Used this to create a certificate request. 
+· The agent shows us the fingerprint of the certificate requested. 
+  If we were using manual signing, we could use this fingerprint to verify that the request and the server matches the one generated on the machine. 
+· The certificate was then generated on our puppet master. 
+  We don't see any entries for that because it happened on the other computer but, we see that this computer received a certificate and stored it locally.
+
+Once the certificate exchange completed, the agent:
+· Retrieved all the information from the machine
+· Sent it to the master. 
+· In exchange, it got back a catalog and applied it. 
+· The catalog applied almost immediately because we haven't actually configured 
+  any rules to be applied to our clients. 
+
+We should go ahead and do that now. We'll go back to our Puppet master and create a couple of node definitions.
+
+As we called out, "node definitions" are stored in a "manifest file" called "site.pp", which is stored at the "root" of the "nodes environment". 
+
+We'll talk more about "environments" in a later module. For now, we just need to know that our client is trying to access the "production environment". 
+
+The file that we need to create will be located in 
+"/etc/puppet/code/environments/production/manifests", and it will be called "site.pp":
+
+"""
+$ vim /etc/puppet/code/environments/production/manifests/site.pp
+"""
+
+In this file, we'll create a couple of node definitions. We want to install Apache in our web server, so we'll create a node definition for the web server with the Apache class and node parameters for now, and we'll also add a default node definition. We'll keep it empty for now. We can add more classes in the future.
+
+"""
+node 'webserver.example.com' {
+  class { 'apache': }
+}
+
+node default {}
+"""
+
+With that, we have our very basic node definition. We can now save this and run the Puppet agent on our web server machine again.
+
+"""
+$ sudo puppet agent -v --test
+"""
+
+This time, the Puppet agent connected to the Puppet master and got a catalog that told it to install and configure the Apache package. This included setting up a bunch of different services. 
+
+Up to now, we've been doing manual runs of the "Puppet agent" for testing purposes. Now that we know it's working fine, we want to keep Puppet running automatically. That way, if we make changes to the configuration, clients will automatically apply those changes without us having to do any manual steps. 
+
+To do that, we'll use the "systemctl" command, which lets us control the services that are enabled when the machine starts and those that are currently running. 
+
+"""
+$ sudo systemctl enable puppet
+
+Synchronizing state of puppet.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable puppet
+"""
+
+We will first tell the "systemctl" to enable the "puppet service" so that the agent gets started whenever the machine reboots, and then we'll tell "systemctl" to start the "puppet service" so that it starts running. 
+
+"""
+$ sudo systemctl start puppet
+"""
+
+Last step, we'll ask "systemctl" for the "status" of the "Puppet service" to check that it's actually running. 
+
+"""
+$ sudo systemctl status puppet
+
+· puppet.service - Puppet agent
+    Loaded: loaded (/lib/systemd/puppet.service; enabled; vendor preset: enabled)
+    Active: active (running) since Fri 2019-12-06 08:59:10 PST; 6s ago
+      Docs: man:puppet-agent(8)
+   Process: 7033 ExecStart=/usr/bin/puppet agent (code=exited, status=0/SUCCESS)
+  Main PID: 7041 (puppet)
+     Tasks: 2 (limit: 2332)
+    CGroup: /system.slice/puppet.service
+            |-7041 /usr/bin/ruby /usr/bin/puppet agent
+
+Dec 06 08:59:09 webserver systemd[1]: Starting Puppet agent...
+Dec 06 08:59:10 webserver puppet-agent[7041]: Reopening log files
+Dec 06 08:59:10 webserver puppet-agent[7041]: Starting Puppet client version 5
+Dec 06 08:59:10 webserver systemd[1]: Started Puppet agent.
+Dec 06 08:59:10 webserver puppet-agent[7045]: Applied catalog in 0.42 seconds
+"""
+
+The Puppet agent will keep regularly checking in with the master and ask if there are any changes that need to be applied to the machine. 
+
+With that, we've seen Puppet in action using the server client model. 
+We use the configuration we set in the Puppet master to manage the installation and configuration of software in our web server, and we set up the Puppet agent in the web server to keep running so that the configuration stays up to date.
+
+We've only seen the very basics of how to configure Puppet, but this can already give you an idea of how powerful "configuration management" can be.
