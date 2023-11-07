@@ -1,0 +1,128 @@
+- Customizing VMs in GCP:
+
+In our last module we checked out how to create a single virtual machine in the cloud. 
+
+That's cool, but not too useful at cloud scale. 
+
+Remember, cloud scale deployments are often comprised of hundreds or thousands of machines. So creating a single server is only the beginning. 
+Let's make some changes to that VM so that we can deploy it at scale. Once we're done, we'll use the instance that we configured as the base for our reference image. Remember that a reference image is just a file or configuration that we can deploy repeatedly and with automated tools. 
+
+This is important because it lets us build scalable services very quickly. 
+
+Let's start by logging into the virtual machine we created in the last module.
+
+We'll use git which will let us clone the repository with the code for the app we want to deploy.
+
+$ git clone https://github.com/blue-kale/hello
+"""
+Cloning into 'hello'...
+"""
+
+The repo we've cloned includes a very simple web serving application written in Python. Let's run it to see what happens.
+
+$ cd hello/
+~/hello$ ./hello_cloud.py
+"""
+Listening for connections on port 8000
+"""
+
+Our script prints a single line saying that it's listening for connections on port 8000. 
+What's happening behind the scenes is that the application is opening a socket and listening for HTTP connections on that port. In this case, it's running on port 8000. And if we were running this locally on our machine, we could connect to that port. But this is running on a virtual machine in the cloud which has a firewall and only a couple of ports enabled. 
+
+- What are our options? 
+The script actually lets us pass the port number that it will open as a parameter.
+
+We want it to run on the HTTP port that we configured in our last video which is port 80. And because this is a system port, to let our application use it, we'll need to run it with admin privileges. 
+
+So, let's stop the running process now by pressing Ctrl+C. And then run it again with sudo and pass port 80 as the parameter.
+
+~/hello$ sudo ./hello_cloud.py 80
+"""
+Listening for connections on port 80
+"""
+
+Now we can visit the website served by our VM and see its contents. Let's navigate to it.
+
+Our web app is extra symbol. It just prints Hello Cloud to the web page generated when we make a request. It also prints the Hostname and IP Address of the machine. This will help us later on when we deploy the solution at scale. 
+
+All right, we have a web serving application running on the HTTP port. That's nice, but we had to start the application manually so this doesn't scale. To get our application to start automatically, we need to configure this as a service. Fortunately, our repo already includes a service definition that we can use. 
+
+Let's check out the contents of that file:
+
+~/hello$ cat hello_cloud.service
+"""
+[Unit]
+after=network.target
+
+[Service]
+ExecStart=/usr/local/bin/hello_cloud.py 80
+
+[Install]
+WantedBy=default.target
+"""
+
+This is a "systemd" file, which is the initializing system used by most modern Linux distributions.
+
+Don't worry if you don't understand what's going on here.
+
+You don't need to understand the details of this file to know how to deploy services to the cloud. 
+Just notice that the configuration expects the script that we want to execute to be in "/usr/local/bin". 
+
+We need to copy that file over to there and then copy the service file to 
+"/etc/systemd/system", which is the directory used for configuring systemd services. 
+
+~/hello$ sudo cp hello_cloud.py /usr/local/bin/
+~/hello$ sudo cp hello_cloud.service /etc/systemd/system/
+
+And finally, we need to tell the "systemctl" command that we want to enable this service so that it runs automatically. 
+
+~/hello$ sudo systemctl enable hello_cloud
+"""
+Created symlink /etc/systemd/system/default.target.wants/hello_cloud.service -> /etc/systemd/system/hello_cloud.service.
+"""
+
+***
+It’s important to know where to copy our "systemd" service file on Linux in order to configure our scripts as services. 
+- Do you remember the location of the systemd directory?
+"etc/systemd/system/" is the default systemd directory in many Linux distros.
+***
+
+Okay, now that we've done this, anytime this machine starts, it will start the web app that we've configured and we'll be able to see the content that we saw before. Let's try it out by triggering a reboot.
+
+~/hello$ sudo reboot
+
+We've rebooted the machine. This will take a while to complete. It tells us that the connection was lost and that we can ask our terminal to reconnect. This will take a bit of time until the machine has finished rebooting and is ready to receive connections, patience, my friend.
+
+Okay, our VM has rebooted. We can check if our application is running by using the ps ax command to get a list of the running processes and filter it so we keep only the ones matching a pattern using the grep command. In this case, we'll use hello as the pattern.
+
+$ ps ax | grep hello
+"""
+1061 ?      Ss  0:00 python3 /usr/local/bin/hello_cloud.py 80
+1735 pts/0  S+  0:00 grep --color=auto hello
+"""
+
+As we can see, our application is now running on startup. 
+
+We're almost ready to turn our configured VM into a template for creating a lot more of them. But before we do that, we need to think about how we'll upgrade our web app when we want to make changes to it. 
+
+There's a bunch of different options here:
+· One option is to create a different reference image each time there's a new 
+  version of the app. This would mean deleting all the old VMs and creating new ones based on the new image.
+· Another option is to add a configuration management system to the images so 
+  that we can use that to manage any changes after the VM's created. 
+  
+We already know how to manage changes with Puppet. 
+
+- Remember our Puppet Master training from earlier modules? 
+Let's install the Puppet client in this instance so it's ready to use Puppet in the future.
+
+$ sudo apt install puppet
+
+When we looked into the Puppet Server and client setup, we saw that there was a bunch of steps that we need to run on the client side to have it ready to apply the rules. The repo we cloned includes a script we can run which will do the initial configuration for us. It will also set the Puppet process to run automatically on boot. Let's run that now.
+
+$ ./hello/setup_puppet.sh
+
+Now any time this machine starts, it will serve our website and we want to update that website's content. We can do that using our Puppet infrastructure.
+
+Our VM is now ready to be used as a basis for a template, which we can use to create as many instances as we need.
+Up next, we'll check out how to create the template and how to create instances based on it.
