@@ -1,0 +1,74 @@
+- Cloud Services Overview:
+
+What does it means that a service is running in the Cloud?
+It means that the service is running somewhere else, either in a data center or in other remote servers that we can reach over the Internet. 
+
+These data centers house a large variety of machines, different types of machines are used for different services. 
+For example, some machines may have local solid-state drive or SSD, for increased performance while others may rely on virtual drives mounted over the network to lower costs. 
+
+Cloud providers typically offer a bunch of different service types, the ones used most by users are in the "Software as a Service" category. 
+
+- Software as a Service (SaaS):
+When a Cloud provider delivers an entire application or program to the customer. 
+
+Examples:
+· Cloud e-mail solution: Gmail, 
+· Cloud storage solution: Dropbox,
+· Cloud productivity suite: Microsoft 365, 
+
+The Cloud provider manages everything related to the service for you, including deciding where it's hosted, ensuring the service has enough capacity to serve your needs, performing backups frequently and reliably, and a lot more. 
+
+There's a lot of software being offered as a service by many different Cloud providers or other Internet companies. But of course, not all of our needs can be solved by prepackaged software, sometimes we need to develop our own. 
+
+For some of the components of our software, we might choose to use Platform as a Service. 
+
+- Platform as a Service (PaaS):
+When a Cloud provider offers a preconfigured platform to the customer. 
+
+When we say platform here, it can be a bit confusing because there are lots of different platforms that exist under a "PaaS" model. 
+
+Example: 
+Say you need an SQL database to store some of your applications data, you could choose to host the database in your own hardware. To do this, you'd need to install an operating system on that computer and then install the SQL software on top of the chosen OS. 
+This requires a basic understanding of all of these different pieces just to get the database running. There's a bunch of things that could go wrong and even if you can eventually solve all of them, it can take awhile. 
+
+Instead, you could decide to use a Cloud provider that offers an SQL database as a service, that way you can just focus on writing SQL queries and using the platform, and let the Cloud provider take care of the rest. 
+
+There's a bunch of different platforms offered as a service by Cloud providers, but of course they are unlikely to cover all of your needs.
+
+If you need a high level of control over the software you're running and how it interacts with other pieces in your system, you might want to choose Infrastructure as a Service. 
+
+- Infrastructure as a Service (IaaS): 
+When a Cloud provider supplies only the bare-bones computing experience.
+
+Generally, this means a virtual machine environment and any networking components needed to connect virtual machines, the Cloud provider won't care what you're using the VMs for. 
+
+You could use them to:
+· Host a web server, 
+· Mail server, 
+· SQL database with your own configuration settings, 
+Or a whole lot more possibilities. 
+Running your IT infrastructure on the Cloud provider's "IaaS" offering is a very popular choice. There's a lot of different providers out there, big and small that offer a service where you can run virtual machines in their Cloud. 
+Some IaaS products include: 
+· Amazon's EC2, 
+· Google Compute Engine,
+· Microsoft Azure Compute. 
+
+Now no matter the service model and the provider you use, when you set up Cloud resources you'll need to consider "regions". 
+
+- Regions:
+A geographical location containing a number of data centers.
+Regions contain "zones" and zones can contain one or more physical data centers. 
+If one of them fails for some reason, the others are still available and services can be migrated without notably affecting users. 
+
+Large Cloud providers usually offer their services in lots of different regions around the world. Generally, the region and zone you select should be closest to your users, the further your users are from the physical data center the more latency they may experience. 
+
+This might sound a bit strange but imagine if you are on vacation overseas, you might notice that your bank website loads a little slower. 
+That's why it's common practice to locate data centers close to where users actually live, work, and bank. 
+
+Latency isn't the only factor to take into account when selecting a region or zone, some organizations require their data to be stored in specific cities or countries for legal or policy reasons. 
+If your service uses other services as dependencies, it's a good idea to host the service physically close to its dependencies. 
+For example, if a mail server requires a database server to send an e-mail, it makes sense to host the database server and the mail server in the same "zone".
+
+Qwiklabs is a service using Cloud infrastructure. 
+- What kind of Cloud service does Qwiklabs use? 
+Qwiklabs uses Infrastructure as a Service (IaaS), the VMs get provisioned with just the OS and the lab automation, then deploys any additional files and software into the OS.

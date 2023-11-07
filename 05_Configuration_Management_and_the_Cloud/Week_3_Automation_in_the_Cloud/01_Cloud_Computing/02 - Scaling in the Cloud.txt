@@ -1,0 +1,76 @@
+- Scaling in the Cloud:
+
+One of the coolest features of deploying solutions to the Cloud is how easily and quickly we can scale our deployments. 
+
+In a traditional IT setting, if your team needs an extra server to improve the service, you need to buy additional hardware, install the operating system and application software and then integrate the new computer with the rest of the infrastructure. 
+Doing all of these takes time so it's not easy to quickly scale up or down if the service gets more or less usage. In other words, it takes a significant amount of time to modify the capacity of the deployment. 
+
+In this context, capacity is how much the service can deliver. 
+The available capacity is tied to the number and size of servers involved. We get more capacity by adding more servers or replacing them with bigger servers. 
+
+We measure the capacity of a system depends on what the system is doing: 
+· If we're storing data, we might care about the total disk space available. 
+· If we have a web server responding to queries from external users, we might 
+  care about the number of queries that can be answered in a second which is called queries per second or "QPS", or maybe the total bandwidth served in an hour. 
+
+We can measure capacity in other fun ways like the number of cat videos served in an hour or the number of digits of Pi a system can calculates. 
+
+Our capacity needs can change over time. Say you're hosting an e-commerce site that needs a hundred servers to meet user demands. 
+As the service becomes more popular, demand might grow and you'll need to increase the available capacity. Eventually, the system could need a thousand servers to meet user demands. 
+
+This capacity change is called "scaling", in particular we call it:
+
+- Upscaling: When we increase our capacity.
+- Downscaling: When we decrease our capacity. This could happen for example if 
+  the demand for a product decreased or if the system was improved to need fewer resources. 
+
+Cloud providers typically have a lot of available capacity that can be used by their customers. When we choose to host our infrastructure in the Cloud, we're purchasing and using some of the providers capacity to supplement or completely replace our on-premise capacity. This lets us easily scale our service to satisfy demand. 
+
+There are a couple of different ways that we can scale our service in the Cloud, "horizontally" and "vertically". 
+
+· To scale a deployment horizontally, "we add more nodes" into the pool that's 
+  part of a specific service.
+  Say your web service is using Apache to serve web pages. By default, Apache is configured to support a 150 concurrent connections. If you want to be able to serve 1,500 connections at the same time, you can deploy 10 Apache web servers and distribute the load across them. 
+  
+This is called horizontal scaling. You add more servers to increase your capacity. If the traffic goes up you could just add more servers to keep up with it. 
+
+· To scale a deployment vertically, "we make nodes bigger". 
+  When we say bigger here we're talking about the resources assigned to the nodes like:
+  Memory, CPU and Disk space. 
+  
+- Examples: 
+· A database server with a 100 gigabytes of disk space can store more data than 
+  with only 10 gigabytes of space. 
+  To scale this deployment we can just add a bigger disk to the machine and the same idea works for a CPU and memory too. 
+
+· Say you have a caching server and you notice it's using 95 percent of the 
+  available memory. 
+  You can deal with that by adding more memory to the node. 
+  
+Depending on our deployment and our needs, we might need to scale both horizontally and vertically to scale the capacity of our service. 
+In other words, adding more and bigger nodes to our pool. 
+
+This approach to scaling isn't too different from what you'd need to do if you have your servers running "on-premise". 
+Instead of sending someone to change the physical deployment, for example adding more physical RAM to a server or adding 10 more physical machines in a server rack, we just modify our deployment by clicking some buttons in a web UI or using a configuration management system to automate the scaling for us. 
+
+The infrastructure built by the Cloud provider will deploy any additional resources we need. 
+
+When talking about scaling in the Cloud, another aspect we need to take into account is whether the scaling is done automatically or manually. 
+· When we set our service to use automatic scaling, we're using a service 
+  offered by the Cloud provider. This service uses metrics to automatically increase or decrease the capacity of the system. 
+
+  Say you have a system that currently has the capacity to serve 1,000 videos per minutes. If the demand for these videos increases to 10,000 per minute, the software in-charge of the automatic scaling will add resources and increase the overall capacity to meet this demand. 
+  When the users stop watching videos, the automation will remove any unused resources, so the operating costs stay small. 
+
+  Make sure you set a reasonable quotas for your autoscaling systems, otherwise a viral video might surprise you with a very big bill from your Cloud provider.
+
+· Using manual scaling means that changes are controlled by humans instead of 
+  software. Manual scaling has its pros and cons too. 
+  When the Cloud deployment isn't very complex, it's usually easier for smaller organizations to use manual scaling practices. 
+  
+  Say your company currently has a single mail server and you know that you'll want to have another one in six months. In that case, there's no need to overcomplicate that system with an autoscaler. You could simply add the extra server sometime along the way. 
+  The trade-off here is that without good monitoring or alerting, a system without autoscaling technologies might suffer from unexpected increases in demand. 
+  
+  If you're using manual scaling for a service that becomes popular and demand grows quickly, you might not be able to increase the capacity quickly enough. 
+  
+  This can store up lots of problems ranging from poor performance to an actual outage.
