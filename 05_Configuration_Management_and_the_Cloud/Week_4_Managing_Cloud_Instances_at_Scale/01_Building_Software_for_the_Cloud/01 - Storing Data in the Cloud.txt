@@ -66,7 +66,7 @@ On top of this, most Cloud providers offer "databases as a service". These come 
   
 When deciding how to store your data, you'll also have to choose a storage class. Cloud providers typically offer different classes of storage at different prices. 
 Variables like performance, availability, or how often the data is accessed will affect the monthly price. 
-The performance of a storage solution is influenced by a number of factors, including throughput, IOPS, and latency. 
+The performance of a storage solution is influenced by a number of factors, including "throughput", "IOPS", and "latency". 
 
 Let's check out what these mean:
 · Throughput: The amount of data that you can read and write in a given amount 

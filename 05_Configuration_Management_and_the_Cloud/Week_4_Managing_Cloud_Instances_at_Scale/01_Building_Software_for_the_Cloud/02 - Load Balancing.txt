@@ -25,8 +25,12 @@ To have more control over how the load's distributed and to make faster changes,
 Load balancers can be super simple or super complex depending on the service needs. Say your service needs to keep track of the actions that a user has taken up till now. 
 
 In this case, you'll want your load balancer to use "sticky sessions". 
-Using sticky sessions means all requests from the same client always go to the same back end server. 
+
+- Sticky sessions:
+All requests from the same client always go to the same back end server. 
+
 This can be really useful for services than need it but can also cause headaches when migrating or maintaining your service. So you need to use it only if you really need it. 
+
 Another cool feature of load balancers is that you can configure them to check the health of the backend servers. Typically, we do this by making a simple query to the servers and checking that the reply matches the expected reply. 
 
 If a back-end server is unhealthy, the load balancer will stop sending new requests to it to keep only healthy servers in the pool. 
