@@ -1,0 +1,79 @@
+This graded quiz assesses your understanding of the concepts and procedures 
+covered in the lab you just completed. Please answer the questions based on the 
+activities you performed in the lab.
+
+Note:
+You can refer to your completed lab for help with the quiz.
+In order to complete this quiz, you must have completed the lab before it.
+
+1. What is the primary benefit of processing text files into Python 
+dictionaries before uploading data to a web service? 
+  - Text files are too large to upload directly to web services.
+  - Python dictionaries facilitate efficient data storage and retrieval.
+X - Python dictionaries allow for easy data manipulation and transformation.
+  - Text files cannot be processed by web services.
+
+2. Why might you choose to use Python's JSON module over the 'pickle' module? 
+  - Because JSON has a smaller memory footprint.
+  - Because JSON supports more data types.
+X - Because JSON is more secure.
+  - Because JSON is faster.
+
+3. Which of the following best defines a web framework in software development? 
+  - A framework specifically designed for mobile application development.
+  - A programming language used exclusively for web development.
+X - A pre-built collection of tools, libraries, and best practices that 
+    simplify the process of developing web applications.
+  - A graphical user interface for designing website layouts and templates.
+
+4. What is the primary purpose of Python's requests library? 
+  - It is used for database interactions
+  - It is used for scientific computing
+  - It is used for creating GUI applications
+X - It is used for handling HTTP requests
+
+5. Which of the following is the required parameter for the os.listdir() method?
+  - A list of file extensions
+  - A file descriptor
+X - A path to the directory whose contents you want to list
+  - No required parameters
+
+6. Which of the following statements best describes one of the constraints of 
+REST architecture? 
+  - REST APIs can maintain client sessions, allowing stateful interactions 
+    between the client and server.
+X - REST requires that the server does not store any client-specific session   
+    information between requests, making it stateless.
+  - REST allows clients to request a specific version of the API, ensuring 
+    backward compatibility.
+  - REST discourages the use of caching to minimize response time and improve 
+    server performance.
+
+7. What is the primary purpose of the HTTP POST method in web development? 
+  - To request data from a server.
+  - To retrieve data from a server cache.
+  - To update existing data on a server.
+X - To submit data to a server to create or update a resource.
+
+8. Which of the following statements best describes an object-relational mapper 
+(ORM) tool in the context of database programming? 
+  - An ORM tool is used to translate data between incompatible type systems in 
+    databases.
+X - An ORM tool is used to map objects in object-oriented programming languages 
+    to tables in relational databases, simplifying database interactions.
+  - An ORM tool is used to create complex visualizations and graphs based on 
+    database data.
+  - An ORM tool is used to optimize database queries for better performance and 
+    responsiveness.
+
+9. Which of the following is a common use case for the cat command?
+  - Executing code
+X - Displaying a file’s contents
+  - Compiling modules
+  - Creating a new script
+
+10. In the lab, why did you check the status_code after making a POST request?
+X - To identify if the request was successful
+  - To reveal the server’s IP address
+  - To determine the size of the response
+  - To display the content of the response
