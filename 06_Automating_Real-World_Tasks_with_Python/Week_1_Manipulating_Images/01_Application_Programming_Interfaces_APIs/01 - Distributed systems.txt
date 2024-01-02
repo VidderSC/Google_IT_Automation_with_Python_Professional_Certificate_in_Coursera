@@ -1,0 +1,100 @@
+- Distributed systems:
+
+A distributed system is a collection of software components that are designed 
+to work together even though they’re on separate servers.
+
+Distributed systems, also referred to as distributed computing or distributed 
+databases, utilize different nodes to interact and synchronize over a shared 
+network. These nodes can also represent independent software processes or other 
+recursive encapsulated systems. They often represent independent physical 
+hardware items as well, such as servers. 
+Distributed systems work to eliminate system bottlenecks and single points of 
+failure.
+
+A common example of a distributed system would be a website that contains:
+· Presentation logic – responsible for displaying the user interface and 
+handling user interactions
+· Business logic – manages the application's rules and processes, ensuring 
+proper data handling and functionality
+· Database engine – stores and retrieves data used by the website
+· Web server – serves as the intermediary between the user's browser and the 
+various components
+
+All of these items could be run on a single server, but it is common to run 
+each component on separate servers for redundancy and fault tolerance.
+
+- Key characteristics of a distributed system:
+
+Distributed computing systems have the following characteristics:
+· Resource sharing – A distributed system may share hardware, software, or data
+· Error detection – Errors and inefficiencies can be more easily detected
+· Transparency – A node in the system can interact and communicate with other 
+nodes
+· Simultaneous processing – The same function can be processed by multiple 
+machines at once
+· Scalability – If more machines are added, the computation and processing 
+power can increase as needed
+· Heterogeneity - The majority of distributed systems have asynchronous nodes 
+and components that use various operating systems, middleware, software, and 
+hardware which make it possible to expand or add new components
+
+Distributed systems are used in various applications and scenarios, including 
+cloud computing, web services, peer-to-peer networks, content delivery networks 
+(CDNs), grid computing, and more. They enable organizations to harness the 
+power of multiple machines and locations to achieve high performance, fault 
+tolerance, and scalability in their computing environments. However, designing 
+and managing distributed systems can be complex, requiring careful 
+consideration of communication protocols, data consistency, and fault-tolerant 
+strategies. Let’s take a look at the advantages and disadvantages of using a 
+distributed system.
+
+- Advantages of a distributed system:
+· Flexibility - You can tune the characteristics of each server to the 
+component that it will be hosting. For example, an application server might 
+need more memory or CPU; a database server needs more disk and I/O throughput.
+· Large volume - You can run multiple copies of components for fault tolerance 
+or to handle higher amounts of traffic. 
+· Redundancy of nodes - A distributed system's nodes provide redundancy so that 
+if one fails, there are other nodes available to step in and take its place. 
+· Fault tolerance - By lowering the risks associated with having a single point 
+of failure, distributed systems improve dependability and fault tolerance.
+
+- Disadvantages of a distributed system:
+· Increased complexity - Compared to conventional computer environments, 
+distributed systems are more difficult to design, administer, and comprehend.
+· Extra work - Components have to do some extra work to find each other. 
+· Potential introduction of new problems - Network problems could introduce a 
+new point of failure into your application.
+· Potential introduction of delays - The network could also introduce some 
+delays.
+· Increased costs - In contrast to centralized systems, distributed systems' 
+scalability enables managers to quickly add more capacity as needed, which can 
+potentially raise expenses.
+
+On one hand, if you are designing an application that needs to scale, you 
+should build in some awareness of distributed systems architecture from the 
+beginning. You should not assume that everything is on the same server as you. 
+Try to find some way for each component to discover the others (anything from a 
+configuration file, to a service catalog, to a full service mesh). 
+On the other hand, don’t overcomplicate things before you need to. 
+Overcomplicated designs can be fragile and hard to maintain in the long term.
+
+- Key takeaways:
+Distributed systems are crucial in various applications, but require careful 
+design and management to address their complexities and potential challenges.  
+
+· Definition of distributed systems - A distributed system is a collection of 
+software components that collaborate across separate servers or nodes, often 
+using a shared network. These systems aim to eliminate bottlenecks and single 
+points of failure by distributing tasks and functions across multiple 
+components.
+· Characteristics of distributed systems - Distributed computing systems 
+exhibit several key characteristics, including resource sharing, error 
+detection, transparency, simultaneous processing, scalability, and 
+heterogeneity.
+· Advantages and disadvantages - Distributed systems offer advantages such as 
+flexibility, handling large volumes of traffic, redundancy of nodes, and fault 
+tolerance. However, they also come with disadvantages like increased 
+complexity, the need for extra work to locate components, potential 
+introduction of new problems and delays due to network issues, and increased 
+costs associated with scalability.

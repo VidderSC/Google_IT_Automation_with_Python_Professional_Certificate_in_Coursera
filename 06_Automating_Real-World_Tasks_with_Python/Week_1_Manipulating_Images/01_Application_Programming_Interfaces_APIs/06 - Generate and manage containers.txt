@@ -1,0 +1,139 @@
+Generate and manage containers:
+
+- Generating image containers:
+Up until now, you have been working with prepackaged container images. Now, 
+it’s time to build your own.
+
+To build a container image, you create a Dockerfile, which contains 
+step-by-step instructions for Docker to package your application along with all 
+its dependencies.
+https://docs.docker.com/get-started/02_our_app/
+
+- Choose a base image:
+One important step is deciding which base image to use. The base image provides 
+all the operating system files inside the container; it’s a bit like trying to 
+choose between different Linux distributions. The best base images provide just 
+what your application needs to run, without a lot of extra bloat, such as extra 
+command line tools, libraries, drivers, etc.
+https://pythonspeed.com/articles/base-image-python-docker-images/
+
+Here are some of the most popular base images:
+· Debian and Ubuntu: containers that boot into a full-featured, general Linux 
+environment
+https://hub.docker.com/_/debian
+https://hub.docker.com/_/ubuntu
+· Alpine Linux: a stripped-down image designed to result in small, fast 
+containers
+https://hub.docker.com/_/alpine
+· Python: great for running Python apps
+https://hub.docker.com/_/python/
+
+The base images make good use of tags to provide lots of choices. For example, 
+you can choose among several versions of Debian or Ubuntu by providing the 
+right tag. 
+The Python base image not only includes every Python version since 3.7, but 
+also includes variants based on the Debian or Alpine images.
+
+- Create a Dockerfile:
+Now, you can create a Dockerfile in your project directory. Again, the 
+Dockerfile lists the steps needed to generate your container image. 
+
+Here’s a sample Dockerfile for a Python web app that uses Flask and SQLAlchemy:
+"""
+FROM python:3.9
+WORKDIR /app
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 4000
+CMD [ "flask", "run", "--host=0.0.0.0", "--port=4000"]
+"""
+
+Here’s a line-by-line explanation of what this does:
+· "FROM" sets the base image to use. In this case, we are using the Python 3.9 
+base image.
+· "WORKDIR" sets the working directory inside the image.
+· "COPY requirements.txt ./" copies the requirements.txt file to the working 
+directory.
+· "RUN pip install -r requirements.txt" installs the requirements.
+· "COPY . ." copies all the files in the current directory to the working 
+directory.
+· "EXPOSE 4000" exposes the port 4000.
+· "CMD [ "flask", "run", "--host=0.0.0.0", "--port=4000"]" tells Docker to run 
+Flask when the container starts.
+
+Your project probably already has a requirements.txt file. Here’s a minimal one 
+that just installs Flask, SQLAlchemy, and the PyMysql driver:
+
+"""
+flask
+pymysql
+Flask-SQLAlchemy
+"""
+
+- Build a Docker image:
+Now that you have these files in your project directory, you can build a Docker 
+image with the "docker build" command. 
+It’s important to choose the best Docker 
+image for your specific project:
+https://linuxize.com/post/how-to-build-docker-images-with-dockerfile/
+https://www.techtarget.com/searchitoperations/tip/Choose-the-best-Docker-image-for-the-job-at-hand
+
+As we discussed previously in the section on containers and tags, you probably 
+want to tag your container image. Most containers at least use tags for the 
+version number. You do that by adding the -t option to the command. For 
+example, you might use the following command:
+
+"docker build -t myname/myapp:1.0 ."
+
+In this command, “myname” is your registry username, and “myapp” is the name of 
+your application.
+
+This command usually produces a lot of output, as Docker downloads the base 
+image, runs each of the commands in your Dockerfile, and tags the image.
+
+If you plan to upload your image to a registry, you can do that by adding the 
+"–push" option. Generally, though, you would build the container, test it, then 
+push it to the registry in a separate step — ideally all as part of a CI/CD 
+pipeline.
+
+- Pro tip:
+Docker images are built from layers. You’ll notice that Docker adds a layer to 
+the image for each command in your Dockerfile. Some of those layers can be 
+quite large, if many files were changed from the previous layer. A common trick 
+is to clean up at the end of a command that creates a bunch of temporary files.
+
+- Manage images:
+When you’ve built your image, you can use it to start a container:
+"""
+docker run -p 4000:4000 myname/myapp:1.0
+"""
+
+In the above command, "myname/myapp:1.0" is the image you built earlier. 
+The "-p" argument forwards port 4000 on the host to the webserver on port 4000 
+inside the container. (Note that it matches the "--port=4000" argument we 
+included in the Dockerfile earlier.)
+
+After you’ve been building containers for a while, you’re going to build up a 
+lot of old, stale, or half-built images. To see what images are sitting around 
+taking up hard drive space, you can use the "ls" command:
+"""
+docker image ls -a
+"""
+
+You can remove the unused images (images that are not associated with any 
+container) with the "prune" command.
+"""
+docker image prune
+"""
+
+As mentioned in the section on generating images, you can also "push" your 
+image to a repository like DockerHub:
+"""
+docker image push myname/myapp:1.0
+"""
+
+- Key takeaways:
+Developers choose to containerize their applications for several reasons, as 
+containerization offers various benefits that make the development, deployment, 
+and management of applications more efficient and scalable.
