@@ -1,0 +1,30 @@
+Qwiklabs assessment: Automatically generate a PDF and send it by email
+
+- Introduction:
+You work for a company that sells second hand cars. Management wants to get a 
+summary of the amounts of vehicles that have been sold at the end of every 
+month. The company already has a web service which serves sales data at the end 
+of every month but management wants an email to be sent out with an attached 
+PDF so that data is more easily readable.
+
+- What you’ll do:
+· Write a script that summarizes and processes sales data into different 
+  categories
+· Generate a PDF using Python
+· Automatically send a PDF by email 
+
+* Please note that there is a graded quiz that follows this lab. You must 
+complete the lab before attempting the quiz. The quiz will assess your 
+comprehension of the key concepts and procedures covered in the lab.
+
+Here's what you can do to prepare:
+· Pay close attention to the instructions and explanations provided during the 
+  lab session.
+· Actively participate in the lab activities and take notes throughout.
+· Review your lab notes before taking the quiz.
+
+- Pro tip: 
+You are allowed to refer to your completed lab notes during the quiz.
+
+-------------------------------------------------------------------------------
+
