@@ -1,0 +1,46 @@
+SLAs
+
+The words I promise are powerful and meaningful. If you tell someone you 
+promise to do something, that person is expecting you to follow through with 
+your promise.
+In the operations and tech world, these promises are called service-level 
+agreements (SLAs).
+
+In this reading, you will learn more about SLAs, how they relate to 
+service-level objectives (SLOs), and common SLAs in the industry.
+
+
+- Service-level agreements:
+
+A service-level agreement is an agreement between a vendor and its clients or 
+users that can be legally binding. 
+
+Typically the SLA is included in the sale contract, guaranteeing a minimum 
+level of performance for the client’s or user’s application. You can think of 
+these as promises you are giving your users. And as with any promise there are 
+consequences for breaking that promise.
+
+The SLA writes out the consequences that result if the promises are not met. 
+Metrics in the SLA can include uptime, responsiveness, and responsibilities. 
+
+
+- How SLAs relate to SLOs:
+
+An SLA outlines the specific SLOs and the penalties for violating them. 
+Oftentimes, these consequences are a financial penalty or a cancellation of the 
+contract. Because of this, it is important to understand what SLAs have been 
+agreed upon to make informed decisions about how much to invest in reliability.
+
+
+- SLA examples:
+
+To view examples and templates of SLAs used in the industry, view the following 
+Service-level agreement (SLA) examples and template:
+https://www.bmc.com/blogs/sla-template-examples/
+
+
+- Key takeaways:
+
+An SLA is a service agreement typically between an IT service provider and a 
+client. It outlines the details of the service, including what the service 
+should accomplish and the consequences if there is a breach in the contract.

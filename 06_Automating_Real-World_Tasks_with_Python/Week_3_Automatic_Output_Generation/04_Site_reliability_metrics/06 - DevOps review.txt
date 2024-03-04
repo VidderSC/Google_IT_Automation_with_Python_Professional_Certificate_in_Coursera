@@ -1,0 +1,47 @@
+DevOps review
+
+Congratulations! You’ve made it to the end of the module!
+Before you tackle the practice quiz and learn more about how DevOps is used in 
+the real world, let’s review everything you’ve learned about DevOps.
+
+DevOps is a methodology that replaced the traditional way of developing and 
+deploying code. DevOps is a collaborative effort between the development and 
+operations teams. They work in an agile environment to eliminate the 
+communication gap between the two teams. This allows the software to be 
+developed more quickly and reliably.
+
+Automation is a key element through the entire DevOps process.
+
+- DevOps has five key principles that include: 
+Collaboration, automation, continuous improvement, customer mindset, and 
+end-goal-focused creation. 
+For DevOps to be successful, team members need to adjust their mindsets and be open to working in a collaborative way with new processes.
+
+- A service-level agreement (SLA) acts as a promise and can be a legally 
+binding agreement between a vendor and its clients or users. It includes the 
+sale contract outlining the minimum level of performance for the client’s or 
+user’s application, and it includes the consequences if there’s a breach in the 
+contract.
+Metrics in the SLA include uptime, responsiveness, and responsibilities. 
+
+- Service-level objectives (SLOs) are found within an SLA and focus on specific 
+metrics like uptime and response time. They should be measurable and clearly 
+written. 
+SLOs set the customers’ expectations and communicate to the IT and DevOps teams 
+the goals they need to achieve. 
+
+- Service-level indicators (SLIs) measure the performance of an application 
+against the SLOs at any given time. Monitoring SLIs provides you with valuable 
+insights on whether your application is meeting the objective or violating the 
+SLA. 
+SLIs help development and operation teams analyze and determine if the promise 
+— or promises — they made to their customers or users are upheld.
+
+- An error budget is the maximum amount of time a software program can fail and 
+still be in compliance with the SLO. This value is typically represented in 
+percentage form and is the difference between 100% and the SLO percentage 
+value. 
+For example, if an SLO states that a website should function properly 99.8% of 
+the time, then the error budget is only 0.2%. 
+DevOps teams use their error budget time either to focus on the reliability of 
+the program or to take risks in the program (if it is running smoothly).

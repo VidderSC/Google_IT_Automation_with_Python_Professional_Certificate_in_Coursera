@@ -1,0 +1,84 @@
+DevOps
+
+The traditional method of developing and deploying code included two teams:
+The development team and the IT operations team. 
+
+The development team would write the code and then hand it off to the 
+operations team. Then, the operations team would be responsible for deploying 
+the code, conducting maintenance on it, and monitoring the code.
+
+With this method, two major problems continued to occur. 
+First, the IT operations team did not have a complete understanding about what 
+they were deploying or how the software should behave. 
+On the other side, the development team lacked real-world knowledge in how 
+their applications performed in production. 
+
+This siloed way of working lacked efficiency and cohesiveness.
+Something had to change. DevOps was the solution.
+
+In this reading, you will learn more about DevOps, its five principles, and how 
+it’s implemented.
+
+
+- DevOps:
+
+DevOps is the union between two important teams: 
+The development team and the operations team. 
+
+It’s a philosophy that attempts to eliminate the historical communication gap 
+between developers and the IT operations department and to automate the 
+processes between the two teams.
+
+The goal of DevOps is to produce better software more quickly and reliably. It 
+focuses on cross-team collaboration and communication. DevOps emphasizes 
+automation throughout the entire development process to increase reliability 
+from writing the code, testing it, deploying it, and monitoring it.
+
+- Let’s explore a well-known streaming service company as an example:
+After becoming wildly successful early on, the company realized they would need 
+to move their services into the cloud to be able to serve their millions of new 
+users. At the same time, they recognized that their monolithic Java application 
+would not support the vast amount of users. 
+
+The company decided to redesign their application as a collection of 
+independent microservices so there would be no single point of failure. They 
+wrote the applications to leverage cloud-native databases and other services 
+offered by the cloud provider. In addition, the company allowed for each team 
+to update and release their team’s services on their own schedule. The company 
+built their own tools to create a continuous integration and delivery pipeline. 
+
+The company did not know it yet, but the changes they were implementing were 
+the basics of DevOps principles.
+
+
+- DevOps principles:
+
+DevOps has the following key principles:
+
+- Collaboration: The main purpose of DevOps is to promote and facilitate
+collaboration among teams.
+
+- Automation: Each part of the development process is automated. This helps
+make the building, testing, deploying, and monitoring of the code more stable
+and predictable.
+
+- Continuous improvement: Teams should always be looking for opportunities to
+improve the process, tools, and communication between teams.
+
+- Customer mindset: Teams should remember that the software they are developing
+will be used by customers. Listen to customers and take their feedback into 
+consideration to continually create an improved software program. You want to 
+develop software that is fun to use.
+
+- Create with the end in mind: Teams should understand customer needs and pain 
+points, and they should develop solutions that solve real problems.
+
+
+- Key takeaways:
+
+The DevOps philosophy is an opportunity for the development and operations 
+teams to work together in an agile environment and optimize the development and 
+deployment process. 
+For DevOps to be successful, team members need to be open to working in a 
+collaborative way with new processes. The automation tools can take time to 
+learn how to implement, but this is only a small part of the larger battle.

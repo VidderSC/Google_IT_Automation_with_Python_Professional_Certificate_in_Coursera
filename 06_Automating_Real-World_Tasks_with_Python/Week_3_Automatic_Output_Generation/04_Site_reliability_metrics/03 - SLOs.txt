@@ -1,0 +1,52 @@
+SLOs
+
+All services have a level of quality and performance they are trying to obtain 
+or reach. In the world of tech and operations, these are called service-level 
+objectives (SLOs).
+
+In this reading, you will learn more about SLOs, including how to write 
+appropriate SLOs and how SLOs relate to service-level agreements (SLAs) and 
+service-level indicators (SLIs).
+
+
+- Service-level objectives (SLOs), defined:
+
+SLOs are found within an SLA and focus on specific and measurable metrics like 
+uptime and response time. SLOs set the customers’ expectations and communicate 
+to the IT and DevOps teams the goals they need to achieve. 
+It’s important to understand and educate yourself on the SLOs that have been 
+promised in the SLA so you can make informed decisions about how to invest in 
+reliability and keep your promise to achieve the objectives.
+
+When creating SLOs, write them as simply and clearly as possible. If the SLOs 
+are vague or immeasurable, they will not serve their purpose and you will be 
+setting yourself up for failure.
+
+
+- SLO example:
+
+Imagine that you work for an IT company that has entered into a contract with a 
+customer, and that contract contains the following SLA:
+
+"""
+You will maintain 99% uptime of your application, defined as “the home page 
+loads correctly 99% of the time within 10 seconds or less.”
+"""
+
+The SLA tells you which SLIs need to be monitored, including the page load time 
+and whether the page loads correctly or returns an HTTP error message.
+
+Your SLOs include:
+    1. The page will load in 10 seconds or less 99% of the time.
+    2. The page will return an HTTP 200 (success) code 99% of the time.
+
+Now that your SLA and SLOs are defined, you can use a combination of monitoring 
+tools to test the site periodically and record the results for tracking your 
+real-world performance against the SLOs.
+
+
+- Key takeaways:
+
+SLOs are important as they help achieve promises defined in the SLA. These help 
+set customer expectations and should be clearly written, measurable, and 
+attainable.

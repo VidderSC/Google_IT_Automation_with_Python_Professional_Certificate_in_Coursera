@@ -1,0 +1,45 @@
+SLIs
+
+A common term used by DevOps engineers and software developers is service-level 
+indicator (SLI). SLIs measure the performance of an application at any given 
+time.
+
+In this reading, you will learn more about SLIs, including what they are, how 
+to measure and monitor them, and how they relate to service-level agreements 
+(SLAs) and service-level objectives (SLOs).
+
+
+- Service-level indicators:
+
+An SLI measures the performance of your application against the objective, or 
+SLO. It’s important to monitor SLIs to determine if your application is meeting 
+the objective — or violating the SLA. 
+Simply, SLIs help answer the question, “How did we do?” in terms of having a 
+promise and reaching that promise. Remember to keep your SLIs simple and choose 
+the right metrics to track. 
+
+
+- SLI example:
+
+Imagine that you work for an IT company and enter into a contract with 
+customers. The contract contains the following SLA:
+"""
+You will maintain 99% uptime of your application, defined as “the home page loads correctly 99% of the time within 10 seconds or less.”
+"""
+
+The SLA tells you which SLIs you should monitor, including the page load time 
+and whether the page loads correctly or returns an HTTP error message.
+
+Monitoring tools like "DataDog" or "AppDynamics" can measure and record these 
+metrics for you. These tools offer the ability to perform synthetic checks, by 
+simulating a user accessing your application, and recording the results. 
+
+The results from the synthetics checks can be used as your SLIs. These 
+monitoring tools help you determine if you are staying within your SLOs.
+
+
+- Key takeaways:
+
+Service-level indicators help make service-learning objectives measurable.
+They provide actual data on performance. 
+SLAs, SLOs, and SLIs all play a role in the overall service reliability.

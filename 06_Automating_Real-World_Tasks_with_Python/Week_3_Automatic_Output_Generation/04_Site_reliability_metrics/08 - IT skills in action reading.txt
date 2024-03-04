@@ -1,0 +1,51 @@
+IT skills in action reading
+
+Congratulations! You have gained so much knowledge on automating real-world 
+tasks with Python. 
+
+There are many technical pieces that are included within automating specific 
+tasks, but how would you apply the skills you’ve learned in a professional 
+setting?
+
+In this reading, you will review an example of how calling APIs and handling 
+exceptions are used in the real world.
+
+Disclaimer: The following scenario is based on fictitious companies.
+
+
+- An outdated customer support system:
+
+Adam Reyes, a software engineer, had a vast amount of data stored in the 
+customer support system, SupportGenius Solutions. 
+SupportGenius Solutions was the original customer support system on the market. 
+At the time, they were innovative and created a huge disruption in the software 
+industry. Unfortunately, SupportGenius Solutions is still using technology that 
+isn’t fully supported and lacks the scalability that other systems have. 
+Because of this, Adam knew it was time to shop for a new customer support 
+system.
+
+
+- Migrating data:
+
+Adam did some research and decided to go with a new customer support system 
+called SupportWave Technologies. 
+SupportWave Technologies is up to date and able to handle Adam’s growing 
+customer service demands. Adam needed to migrate his data from SupportGenius 
+Solutions to SupportWave Technologies, but the only way to do this was to pay 
+for a service to transfer the data. This solution was perfectly fine with Adam 
+until he realized this transferring service was going to cost him thousands of 
+dollars. There had to be another — cheaper — way.
+
+
+- The affordable solution:
+
+Adam decided to use his Python programming skills to migrate the data instead. 
+He called APIs and the requests module to extract the data from SupportGenius 
+Solutions and processed everything on his own. 
+Then, he loaded the data onto SupportWave Technologies. One downside to 
+SupportWave Technologies that Adam discovered was that its API was prone to 
+random errors. Adam decided to use Python’s exception handling mechanism to 
+retry operations until they were completed. Adam used his Python skills to not 
+only migrate data from one customer support system to another,  and he also did 
+it affordably, allowing him to handle the growing customer service inquiries he 
+was receiving.

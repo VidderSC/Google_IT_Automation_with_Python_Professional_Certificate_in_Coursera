@@ -1,0 +1,70 @@
+Error budgets
+
+Can you remember a time when you were growing up and someone gave you twenty 
+dollars to spend at the grocery store? 
+They might have said to bring home a gallon of milk and a dozen eggs, and 
+whatever money is left you can spend however you want. 
+That extra money — or the change — is akin to an error budget in service 
+operations.
+
+In this reading, you will learn more about error budgets, how they pertain to 
+IT roles, and how an error budget can be used in the real world.
+
+
+- Definition of an error budget:
+
+An error budget is the maximum amount of time a software program can fail and 
+still be in compliance with the service-level objective (SLO). 
+An error budget is typically represented by a percentage. A simple example is 
+this: If an SLO states that a website should function properly 99.9% of the 
+time, then the error budget is only 0.1%.
+
+Now let’s calculate the error budget using time as a measurement in the 
+question below. Here is an example in which an error budget is computed for a 
+month’s time frame using the following formula:
+
+Error budget = Total time * (1-SLO)
+
+What is the error budget, in minutes, with an SLO of 99.9% uptime over a month?
+
+The total time is the total time in minutes for a given time period. (Assume a 
+30-day month for this example.) The SLO is the service-level objective 
+represented as a decimal.
+
+Total time = 30*24*60 = 43,200. This formula multiplies 30 days by 24 hours in 
+each day by 60 minutes in each hour to get a total of 43,200 minutes.
+
+SLO = 99.9/100 = 0.999. This value represents the SLO as a decimal.
+
+Substitute these values into the formula to get:
+
+Error budget = 43,200 * (1–0.999) = 43.1 minutes.
+This means the maximum amount of time the service can be down is up to 43 
+minutes per month without violating the agreed-upon reliability standards (the 
+SLO).
+
+
+- The role of error budgets:
+
+Error budgets are part of cloud operations, site reliability engineering, and 
+DevOps teams. They are used as a metric to make sure everything is running 
+smoothly. If everything is running smoothly and there is a significant amount 
+of time to use from the error budget, then DevOps members can use this time to 
+invest in innovation on a product or software program.
+
+Error budgets also help establish limits for the development and programming 
+teams. If there is not a lot of error budget to use, then developers know that 
+they can’t try new things and that their focus needs to remain on the 
+reliability of the product or program.
+
+Developers should save the release of new features for when the error budget is 
+large.
+
+
+- Key takeaways:
+
+Error budgets are typically represented as the maximum amount of time that a 
+program is able to fail without violating an agreement. The error budget is 
+based on the agreed-upon SLO between the clients and vendor. Developers are in 
+favor of higher error budgets because this allows them to innovate and try new 
+things within the product or service.
