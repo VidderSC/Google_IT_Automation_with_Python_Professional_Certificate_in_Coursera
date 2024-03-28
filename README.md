@@ -20,6 +20,10 @@
 - Automation
 
 
+## Specialization Certificate:
+- :ballot_box_with_check: Google IT Automation with Python. ([Cert.](https://coursera.org/verify/professional-cert/EYCDS2Y7AEPD))
+
+
 ## Courses included in this Certificate 
 There are 6 courses included, each of them with their own certificate:
 - :ballot_box_with_check: 01. Crash Course on Python.  ([Cert.](https://coursera.org/verify/PSLM4Y9NGPUT))
@@ -27,7 +31,7 @@ There are 6 courses included, each of them with their own certificate:
 - :ballot_box_with_check: 03. Introduction to Git and GitHub.  ([Cert.](https://coursera.org/verify/99D85T5J4EZP))
 - :ballot_box_with_check: 04. Troubleshooting and Debugging Techniques.  ([Cert.](https://coursera.org/verify/B2JC9QJ35B6W))
 - :ballot_box_with_check: 05. Configuration Management and the Cloud.  ([Cert.](https://coursera.org/verify/PBP26CGLEW7B))
-- :unlock: 06. Automating Real-World Tasks with Python. (In progress..)
+- :ballot_box_with_check: 06. Automating Real-World Tasks with Python. ([Cert.](https://coursera.org/verify/UXA5EU2C62J4))
 
 
 ### Notes:
